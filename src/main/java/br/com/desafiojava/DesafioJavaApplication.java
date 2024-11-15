@@ -15,12 +15,10 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.PropertySource;
 
 @SpringBootApplication
-@EnableAutoConfiguration
-@EnableAspectJAutoProxy(proxyTargetClass = true)
-@ComponentScan({ "br.com.desafiojava.*" })
-@PropertySource("classpath:application.yml")
+
 public class DesafioJavaApplication {
 
+	/*
 	@Value("${jndi-name}")
 	private String jndiName;
 
@@ -61,7 +59,7 @@ public class DesafioJavaApplication {
 			}
 		};
 	}
-
+*/
 	public static void main(String[] args) {
 		SpringApplication.run(DesafioJavaApplication.class, args);
 	}

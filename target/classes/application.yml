@@ -16,18 +16,18 @@ spring:
     allow-bean-definition-overriding: true
   datasource:
     url: jdbc:postgresql://${DB_URL:localhost}:${DB_PORT:5432}/${DB_NAME:postgres}
-    usuario: ${DB_USERNAME:postgres}
+    username: ${DB_USERNAME:postgres}
     password: ${DB_PASSWORD:334863333}
     driver-class-name: org.postgresql.Driver
-    jndi-name: ${JNDI_NAME:jdbc/desafioJava}
   jpa:
+    hibernate:
+      ddl-auto: update
     properties:
       hibernate:
-        ddl-auto: none
-        show_sql: true
-        use_sql_comments: true
-        format_sql: true
-        type: trace 
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true     # Enables SQL formatting
+    show-sql: true           # Shows SQL statements in the console
+    format-sql: true
   sql:
     init:
       mode: always
