@@ -8,7 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Desafio Java</title>
-
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>	
     <link href="<c:url value="/static/node_modules/bootstrap/dist/css/bootstrap.min.css"/>"
           rel="stylesheet">
 

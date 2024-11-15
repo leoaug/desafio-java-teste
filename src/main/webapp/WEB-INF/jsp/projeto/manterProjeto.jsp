@@ -1,6 +1,11 @@
 <!-- src/main/resources/WEB-INF/jsp/index.jsp -->
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="/WEB-INF/jsp/template/header.jsp" %>
-  
+  <script>
+        $(document).ready(function(){
+            $('#orcamento').mask('R$ #.##0,00', {reverse: true});
+        });
+  </script>
   <div class="container mt-4">
     <h2>Projetos</h2>
     <button class="btn btn-success mb-3" data-toggle="modal" data-target="#modalNovoProjeto">Novo Projeto</button>
@@ -11,6 +16,7 @@
                 <th>Nome</th>
                 <th>Data Início</th>
                 <th>Data Fim</th>
+                <th>Gerente</th>
                 <th>Risco</th>
                 <th>Status</th>
                 <th>Ações</th>
@@ -22,6 +28,7 @@
                     <td>${projeto.nome}</td>
                     <td>${projeto.dataInicio}</td>
                     <td>${projeto.dataFim}</td>
+                    <td>${projeto.gerente.nome}</td>
                     <td>${projeto.risco}</td>
                     <td>${projeto.status}</td>
                     <td>
@@ -59,6 +66,26 @@
                         <input type="date" class="form-control" id="dataFim" required>
                     </div>
                     <div class="form-group">
+                        <label for="orcamento">Orçamento</label>
+                        <input type="text" class="form-control"  id="orcamento" required>
+                    </div>
+                    
+                   	<div class="form-group"> 
+                   	    <label for="descricao">Descrição:</label>
+    					<textarea id="descricao" class="form-control" rows="5" cols="50" placeholder="Digite a descrição"></textarea>
+                   	</div>
+
+   
+                    <div class="form-group">	                   
+                    	<label for="risco">Gerente</label>
+                        <select class="form-control" id="gerente">
+                        	<c:forEach var="gerente" items="${gerentes}">
+                            	<option value="${gerente.id}">${gerente.nome}</option>
+                            </c:forEach>	                           
+                        </select>                 
+	                </div>
+                    
+                    <div class="form-group">
                         <label for="risco">Risco</label>
                         <select class="form-control" id="risco">
                             <option value="1">Baixo</option>
@@ -94,25 +121,29 @@
         // Carregar lista de projetos
         function carregarTabela() {
             $.ajax({
-                url: '/projeto', // Endereço do controller para obter os projetos
+                url: '/projeto/index', // Endereço do controller para obter os projetos
                 method: 'GET',
                 success: function(projetos) {
                     var html = '';
-                    projetos.forEach(function(projeto) {
-                        html += `
-                            <tr>
-                                <td>${projeto.nome}</td>
-                                <td>${projeto.dataInicio}</td>
-                                <td>${projeto.dataFim}</td>
-                                <td>${projeto.risco}</td>
-                                <td>${projeto.status}</td>
-                                <td>
-                                    <button class="btn btn-info btn-editar" data-id="${projeto.id}">Editar</button>
-                                    <button class="btn btn-danger btn-excluir" data-id="${projeto.id}">Excluir</button>
-                                </td>
-                            </tr>
-                        `;
-                    });
+                    if (projetos && Array.isArray(projetos)) {
+	                    projetos.forEach(function(projeto) {
+	                        html += `
+	                            <tr>
+	                                <td>${projeto.nome}</td>
+	                                <td>${projeto.dataInicio}</td>
+	                                <td>${projeto.dataFim}</td>
+	                                <td>${projeto.orcamento}</td>
+	                                <td>${projeto.descricao}</td>
+	                                <td>${projeto.risco}</td>
+	                                <td>${projeto.status}</td>
+	                                <td>
+	                                    <button class="btn btn-info btn-editar" data-id="${projeto.id}">Editar</button>
+	                                    <button class="btn btn-danger btn-excluir" data-id="${projeto.id}">Excluir</button>
+	                                </td>
+	                            </tr>
+	                        `;
+	                    });
+                    }
                     $('#tabelaProjetos').html(html);
                 }
             });
@@ -122,14 +153,26 @@
 
         // Criar novo projeto
         $('#salvarProjeto').click(function() {
+
+            
             var projeto = {
                 nome: $('#nome').val(),
                 dataInicio: $('#dataInicio').val(),
                 dataFim: $('#dataFim').val(),
+                gerente: {
+					id: parseInt($('#gerente').val(),10),
+					nome: $('#gerente').text()
+                },
+                orcamento : $('#orcamento').val(),
+                descricao : $('#descricao').val(),
                 risco: $('#risco').val(),
                 status: $('#status').val()
+                           
+               
             };
 
+            console.log(JSON.stringify(projeto));
+            
             $.ajax({
                 url: '/projeto/salvar',
                 method: 'POST',
@@ -165,6 +208,8 @@
                     $('#nome').val(projeto.nome);
                     $('#dataInicio').val(projeto.dataInicio);
                     $('#dataFim').val(projeto.dataFim);
+                    $('#orcamento').val(projeto.orcamento);
+                    $('#descricao').val(projeto.descricao);
                     $('#risco').val(projeto.risco);
                     $('#status').val(projeto.status);
                     $('#modalNovoProjeto').modal('show');

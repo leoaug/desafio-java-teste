@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import br.com.desafiojava.jpa.repository.PessoaRepository;
 import br.com.desafiojava.model.Pessoa;
-import lombok.RequiredArgsConstructor;
 
 @Service
 public class PessoaService {
@@ -45,5 +44,9 @@ public class PessoaService {
     // Buscar Todos os Produtos
     public List<Pessoa> getAll() {
         return pessoaRepository.findAll();
+    }
+    
+    public List<Pessoa> findByGerente(Boolean gerente) {
+    	return pessoaRepository.findByGerente(gerente);
     }
 }
