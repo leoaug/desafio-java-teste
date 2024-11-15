@@ -1,7 +1,5 @@
 package br.com.desafiojava.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import br.com.desafiojava.model.Pessoa;
 import br.com.desafiojava.model.Projeto;
 import br.com.desafiojava.service.PessoaService;
 import br.com.desafiojava.service.ProjetoService;
@@ -30,18 +27,16 @@ public class ProjetoController {
 
 	@GetMapping("index")
 	public String index(Model model) {
-		List<Projeto> projetos = projetoService.getAll();
-		model.addAttribute("projetos", projetos);
-		
-		List <Pessoa> gerentes = pessoaService.findByGerente(Boolean.TRUE);
-        model.addAttribute("gerentes", gerentes);
+		model.addAttribute("projetos", projetoService.getAll());		
+        model.addAttribute("gerentes", pessoaService.findByGerente(Boolean.TRUE));
 		return "projeto/manterProjeto";
 	}
 
 	@PostMapping("salvar")
 	@ResponseBody
 	public Projeto salvar(@RequestBody Projeto projeto) {
-		return projetoService.save(projeto);
+		projeto.setGerente(pessoaService.getById(projeto.getGerente().getId()));
+		return projeto.getId() == null ? projetoService.save(projeto) : projetoService.update(projeto.getId(), projeto);		
 	}
 
 	@DeleteMapping("excluir/{id}")

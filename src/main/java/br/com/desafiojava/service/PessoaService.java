@@ -8,8 +8,10 @@ import org.springframework.stereotype.Service;
 
 import br.com.desafiojava.jpa.repository.PessoaRepository;
 import br.com.desafiojava.model.Pessoa;
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class PessoaService {
 
 	@Autowired

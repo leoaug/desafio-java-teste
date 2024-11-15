@@ -1,9 +1,10 @@
 <!-- src/main/resources/WEB-INF/jsp/index.jsp -->
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ include file="/WEB-INF/jsp/template/header.jsp" %>
   <script>
         $(document).ready(function(){
-            $('#orcamento').mask('R$ #.##0,00', {reverse: true});
+            $('#orcamento').mask('R$ #.###.##0,00', {reverse: true});
         });
   </script>
   <div class="container mt-4">
@@ -16,6 +17,8 @@
                 <th>Nome</th>
                 <th>Data Início</th>
                 <th>Data Fim</th>
+                <th>Data Previsão</th>
+                <th>Orçamento</th>
                 <th>Gerente</th>
                 <th>Risco</th>
                 <th>Status</th>
@@ -26,10 +29,26 @@
             <c:forEach var="projeto" items="${projetos}">
                 <tr>
                     <td>${projeto.nome}</td>
-                    <td>${projeto.dataInicio}</td>
-                    <td>${projeto.dataFim}</td>
+                    <td>                    	
+                    	<fmt:formatDate value="${projeto.dataInicio}" pattern="dd/MM/yyyy" />
+                    </td>
+                    <td>                   	
+                    	<fmt:formatDate value="${projeto.dataFim}" pattern="dd/MM/yyyy" />
+                    </td>
+                    <td>                 	
+                    	<fmt:formatDate value="${projeto.dataPrevisao}" pattern="dd/MM/yyyy" />
+                    </td>
+                    <td>                   	
+                    	<fmt:formatNumber value="${projeto.orcamento}" type="currency" currencySymbol="R$" />
+                    </td>
                     <td>${projeto.gerente.nome}</td>
-                    <td>${projeto.risco}</td>
+                    <td>
+                   	   <c:choose>
+				            <c:when test="${projeto.risco == 1}">Baixo</c:when>
+				            <c:when test="${projeto.risco == 2}">Médio</c:when>
+				            <c:otherwise>Alto</c:otherwise>
+      					</c:choose>
+                    </td>
                     <td>${projeto.status}</td>
                     <td>
                         <button class="btn btn-info btn-editar" data-id="${projeto.id}">Editar</button>
@@ -43,7 +62,7 @@
 
 <!-- Modal Novo Projeto -->
 <div class="modal fade" id="modalNovoProjeto" tabindex="-1" role="dialog" aria-labelledby="modalNovoProjetoLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog" role="document" style="width: 600px !important">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modalNovoProjetoLabel">Novo Projeto</h5>
@@ -57,14 +76,20 @@
                         <label for="nome">Nome</label>
                         <input type="text" class="form-control" id="nome" required>
                     </div>
-                    <div class="form-group">
-                        <label for="dataInicio">Data Início</label>
-                        <input type="date" class="form-control" id="dataInicio" required>
+                    <div class="form-group-inline">
+                    	 <label for="dataInicio">Data Início</label>
+    					 <input type="date" class="form-control" id="dataInicio" required>
+    					 
+    					 <label for="dataFim">Data Fim</label>
+    					 <input type="date" class="form-control" id="dataFim" required>
                     </div>
-                    <div class="form-group">
-                        <label for="dataFim">Data Fim</label>
-                        <input type="date" class="form-control" id="dataFim" required>
+                    
+                     <div class="form-group">
+                        <label for="dataFim">Data Previsão</label>
+                        <input type="date" class="form-control" id="dataPrevisao" required>
                     </div>
+                    
+                    
                     <div class="form-group">
                         <label for="orcamento">Orçamento</label>
                         <input type="text" class="form-control"  id="orcamento" required>
@@ -72,7 +97,7 @@
                     
                    	<div class="form-group"> 
                    	    <label for="descricao">Descrição:</label>
-    					<textarea id="descricao" class="form-control" rows="5" cols="50" placeholder="Digite a descrição"></textarea>
+    					<textarea id="descricao" class="form-control" rows="5" cols="25" placeholder="Digite a descrição"></textarea>
                    	</div>
 
    
@@ -127,15 +152,22 @@
                     var html = '';
                     if (projetos && Array.isArray(projetos)) {
 	                    projetos.forEach(function(projeto) {
+
+	                        const risco = projeto.risco === 1 ? "Baixo" : projeto.risco === 2 ? 'Médio' : 'Alto';
+							
 	                        html += `
 	                            <tr>
 	                                <td>${projeto.nome}</td>
 	                                <td>${projeto.dataInicio}</td>
 	                                <td>${projeto.dataFim}</td>
+	                                <td>${projeto.dataPrevisao}</td>
 	                                <td>${projeto.orcamento}</td>
 	                                <td>${projeto.descricao}</td>
-	                                <td>${projeto.risco}</td>
+	                                <td> 
+	                                	${risco}
+	                                </td>
 	                                <td>${projeto.status}</td>
+	                                <td>${projeto.gerente.nome}</td>
 	                                <td>
 	                                    <button class="btn btn-info btn-editar" data-id="${projeto.id}">Editar</button>
 	                                    <button class="btn btn-danger btn-excluir" data-id="${projeto.id}">Excluir</button>
@@ -149,29 +181,30 @@
             });
         }
 
-        carregarTabela();  // Carregar tabela ao iniciar
-
         // Criar novo projeto
         $('#salvarProjeto').click(function() {
 
+
+        	 const cleanedString = $('#orcamento').val().replace(/[^\d,.-]/g, '');
+        	 const normalizedString = cleanedString.replace('.', '').replace(',', '.');
+        	 const orcamentoFloat = parseFloat(normalizedString);
             
             var projeto = {
                 nome: $('#nome').val(),
                 dataInicio: $('#dataInicio').val(),
                 dataFim: $('#dataFim').val(),
+                dataPrevisao : $('#dataPrevisao').val(),
                 gerente: {
 					id: parseInt($('#gerente').val(),10),
 					nome: $('#gerente').text()
                 },
-                orcamento : $('#orcamento').val(),
+                orcamento : orcamentoFloat ,
                 descricao : $('#descricao').val(),
                 risco: $('#risco').val(),
                 status: $('#status').val()
                            
                
             };
-
-            console.log(JSON.stringify(projeto));
             
             $.ajax({
                 url: '/projeto/salvar',
@@ -204,14 +237,29 @@
                 url: '/projeto/editar/' + id,
                 method: 'GET',
                 success: function(projeto) {
+                	
                     // Aqui você pode preencher os campos de edição com os dados do projeto
                     $('#nome').val(projeto.nome);
-                    $('#dataInicio').val(projeto.dataInicio);
-                    $('#dataFim').val(projeto.dataFim);
-                    $('#orcamento').val(projeto.orcamento);
+                    $('#dataInicio').val(convertDateFormat(new Date(projeto.dataInicio).toLocaleDateString('pt-BR', {
+                	    day: '2-digit',
+                	    month: '2-digit',
+                	    year: 'numeric'
+                	})));
+                    $('#dataFim').val(convertDateFormat(new Date(projeto.dataFim).toLocaleDateString('pt-BR', {
+                        day: '2-digit',
+                        month: '2-digit',
+                        year: 'numeric'
+                    })));
+                    $('#dataPrevisao').val(convertDateFormat(new Date(projeto.dataPrevisao).toLocaleDateString('pt-BR', {
+                        day: '2-digit',
+                        month: '2-digit',
+                        year: 'numeric'
+                    })));
+                    $('#orcamento').val(convertMoney(projeto.orcamento));
                     $('#descricao').val(projeto.descricao);
                     $('#risco').val(projeto.risco);
                     $('#status').val(projeto.status);
+                    $('#gerente').val(projeto.gerente.id);
                     $('#modalNovoProjeto').modal('show');
                 }
             });

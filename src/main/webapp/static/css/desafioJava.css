@@ -1,0 +1,13 @@
+.form-group-inline {
+	display: flex;
+	gap: 10px; /* Spacing between inputs */
+	align-items: center; /* Aligns labels and inputs vertically */
+}
+
+.form-group-inline label {
+	white-space: nowrap; /* Prevents label wrapping */
+}
+
+.form-group-inline input {
+	flex: 1; /* Makes inputs take equal space */
+}
