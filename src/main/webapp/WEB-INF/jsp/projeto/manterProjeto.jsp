@@ -49,10 +49,23 @@
 				            <c:otherwise>Alto</c:otherwise>
       					</c:choose>
                     </td>
-                    <td>${projeto.status}</td>
+                    <td>
+                    	<c:choose>
+				            <c:when test="${projeto.status == 1}">Em Análise</c:when>
+				            <c:when test="${projeto.status == 2}">Análise Realizada</c:when>
+				            <c:when test="${projeto.status == 3}">Análise Aprovada</c:when>
+				            <c:when test="${projeto.status == 4}">Iniciado</c:when>
+				            <c:when test="${projeto.status == 5}">Planejado</c:when>
+				            <c:when test="${projeto.status == 6}">Em Andamento</c:when>
+				            <c:when test="${projeto.status == 7}">Encerrado</c:when>
+				            <c:otherwise>Cancelado</c:otherwise>
+      					</c:choose>
+                    </td>
                     <td>
                         <button class="btn btn-info btn-editar" data-id="${projeto.id}">Editar</button>
-                        <button class="btn btn-danger btn-excluir" data-id="${projeto.id}">Excluir</button>
+                        <c:if test="${!(projeto.status eq '4' || projeto.status eq '6' || projeto.status eq '7')}">                       
+                        	<button class="btn btn-danger btn-excluir" data-id="${projeto.id}">Excluir</button>                      
+                        </c:if>
                     </td>
                 </tr>
             </c:forEach>
@@ -160,8 +173,7 @@
                 descricao : $('#descricao').val(),
                 risco: $('#risco').val(),
                 status: $('#status').val()
-                           
-               
+                                     
             };
             
             $.ajax({
@@ -188,10 +200,9 @@
             });
         });
 
-        // Editar projeto
+        // abrir modal de Editar projeto
         $(document).on('click', '.btn-editar', function() {
             var id = $(this).data('id');
-            alert("id ao editar = " + id);
             $.ajax({
                 url: '/projeto/editar/' + id,
                 method: 'GET',
