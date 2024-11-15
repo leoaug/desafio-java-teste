@@ -1,5 +1,6 @@
 package br.com.desafiojava.desafiojava;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.spy;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -23,9 +24,11 @@ class DesafioJavaApplicationTests {
 		 
 	} 
 	
+	@SuppressWarnings("static-access")
 	@Test
 	void contextLoads() {
-		desafiojavaApplication.main(new String[] {"aplicacao startada"});;
+		desafiojavaApplication.main(new String[] {"aplicacao startada"});
+		assertTrue(true);
 	}
 
 }

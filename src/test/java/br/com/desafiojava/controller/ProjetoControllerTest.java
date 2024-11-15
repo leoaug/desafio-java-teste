@@ -73,7 +73,7 @@ class ProjetoControllerTest {
 	}
 
 	@Test
-	public void testIndex() throws Exception {
+	void testIndex() throws Exception {
 		when(projetoService.getAll()).thenReturn(List.of(projeto));
 		when(pessoaService.findByGerente(Boolean.TRUE)).thenReturn(List.of());
 
