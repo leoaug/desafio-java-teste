@@ -11,7 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import br.com.desafiojava.DesafioJavaApplication;
 
 @SpringBootTest
-class DesafioJavaApplicationTests {
+class DesafioJavaApplicationTest {
 
 	private DesafioJavaApplication desafiojavaApplication;
 	
