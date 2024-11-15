@@ -72,6 +72,7 @@
             </div>
             <div class="modal-body">
                 <form id="formNovoProjeto">
+                	<input type="hidden" id="id" />
                     <div class="form-group">
                         <label for="nome">Nome</label>
                         <input type="text" class="form-control" id="nome" required>
@@ -84,16 +85,14 @@
     					 <input type="date" class="form-control" id="dataFim" required>
                     </div>
                     
-                     <div class="form-group">
+                    <div class="form-group-inline">
                         <label for="dataFim">Data Previsão</label>
                         <input type="date" class="form-control" id="dataPrevisao" required>
-                    </div>
-                    
-                    
-                    <div class="form-group">
+                        
                         <label for="orcamento">Orçamento</label>
                         <input type="text" class="form-control"  id="orcamento" required>
                     </div>
+                    
                     
                    	<div class="form-group"> 
                    	    <label for="descricao">Descrição:</label>
@@ -143,53 +142,12 @@
 
 <script>
     $(document).ready(function() {
-        // Carregar lista de projetos
-        function carregarTabela() {
-            $.ajax({
-                url: '/projeto/index', // Endereço do controller para obter os projetos
-                method: 'GET',
-                success: function(projetos) {
-                    var html = '';
-                    if (projetos && Array.isArray(projetos)) {
-	                    projetos.forEach(function(projeto) {
-
-	                        const risco = projeto.risco === 1 ? "Baixo" : projeto.risco === 2 ? 'Médio' : 'Alto';
-							
-	                        html += `
-	                            <tr>
-	                                <td>${projeto.nome}</td>
-	                                <td>${projeto.dataInicio}</td>
-	                                <td>${projeto.dataFim}</td>
-	                                <td>${projeto.dataPrevisao}</td>
-	                                <td>${projeto.orcamento}</td>
-	                                <td>${projeto.descricao}</td>
-	                                <td> 
-	                                	${risco}
-	                                </td>
-	                                <td>${projeto.status}</td>
-	                                <td>${projeto.gerente.nome}</td>
-	                                <td>
-	                                    <button class="btn btn-info btn-editar" data-id="${projeto.id}">Editar</button>
-	                                    <button class="btn btn-danger btn-excluir" data-id="${projeto.id}">Excluir</button>
-	                                </td>
-	                            </tr>
-	                        `;
-	                    });
-                    }
-                    $('#tabelaProjetos').html(html);
-                }
-            });
-        }
-
+       
         // Criar novo projeto
         $('#salvarProjeto').click(function() {
-
-
-        	 const cleanedString = $('#orcamento').val().replace(/[^\d,.-]/g, '');
-        	 const normalizedString = cleanedString.replace('.', '').replace(',', '.');
-        	 const orcamentoFloat = parseFloat(normalizedString);
-            
+           
             var projeto = {
+				id: $('#id').val(),
                 nome: $('#nome').val(),
                 dataInicio: $('#dataInicio').val(),
                 dataFim: $('#dataFim').val(),
@@ -198,7 +156,7 @@
 					id: parseInt($('#gerente').val(),10),
 					nome: $('#gerente').text()
                 },
-                orcamento : orcamentoFloat ,
+                orcamento : convertStringToFloat($('#orcamento').val()) ,
                 descricao : $('#descricao').val(),
                 risco: $('#risco').val(),
                 status: $('#status').val()
@@ -213,7 +171,7 @@
                 data: JSON.stringify(projeto),
                 success: function() {
                     $('#modalNovoProjeto').modal('hide');
-                    carregarTabela();  // Recarregar a tabela
+                    window.location.href = '/projeto/index'; 
                 }
             });
         });
@@ -225,7 +183,7 @@
                 url: '/projeto/excluir/' + id,
                 method: 'DELETE',
                 success: function() {
-                    carregarTabela();  // Recarregar a tabela
+                	window.location.href = '/projeto/index'; 
                 }
             });
         });
@@ -233,12 +191,14 @@
         // Editar projeto
         $(document).on('click', '.btn-editar', function() {
             var id = $(this).data('id');
+            alert("id ao editar = " + id);
             $.ajax({
                 url: '/projeto/editar/' + id,
                 method: 'GET',
                 success: function(projeto) {
                 	
                     // Aqui você pode preencher os campos de edição com os dados do projeto
+                    $('#id').val(projeto.id);
                     $('#nome').val(projeto.nome);
                     $('#dataInicio').val(convertDateFormat(new Date(projeto.dataInicio).toLocaleDateString('pt-BR', {
                 	    day: '2-digit',
