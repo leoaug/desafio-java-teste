@@ -7,9 +7,9 @@ public enum RiscoProjetoEnum {
     ALTO_RISCO("Alto Risco", 3);
 
     private final String label;
-    private final int value;
+    private final Integer value;
 
-    RiscoProjetoEnum(String label, int value) {
+    RiscoProjetoEnum(String label, Integer value) {
         this.label = label;
         this.value = value;
     }
@@ -23,7 +23,7 @@ public enum RiscoProjetoEnum {
     }
 
     // Método para obter o enum a partir do valor
-    public static RiscoProjetoEnum fromValue(int value) {
+    public static RiscoProjetoEnum fromValue(Integer value) {
         for (RiscoProjetoEnum nivel : RiscoProjetoEnum.values()) {
             if (nivel.value == value) {
                 return nivel;

@@ -3,20 +3,20 @@ package br.com.desafiojava.constants;
 public enum StatusProjetoEnum {
 
 
-    EM_ANALISE("Em Análise", "1"),
-    ANALISE_REALIZADA("Análise Realizada", "2"),
-    ANALISE_APROVADA("Análise Aprovada", "3"),
-    INICIADO("Iniciado", "4"),
-    PLANEJADO("Planejado", "5"),
-    EM_ANDAMENTO("Em Andamento", "6"),
-    ENCERRADO("Encerrado", "7"),
-    CANCELADO("Cancelado", "8");
+    EM_ANALISE("Em Análise", 1),
+    ANALISE_REALIZADA("Análise Realizada", 2),
+    ANALISE_APROVADA("Análise Aprovada", 3),
+    INICIADO("Iniciado", 4),
+    PLANEJADO("Planejado", 5),
+    EM_ANDAMENTO("Em Andamento", 6),
+    ENCERRADO("Encerrado", 7),
+    CANCELADO("Cancelado", 8);
 
     private final String label;
-    private final String value;
+    private final Integer value;
 
     // Construtor
-    StatusProjetoEnum(String label, String value) {
+    StatusProjetoEnum(String label, Integer value) {
         this.label = label;
         this.value = value;
     }
@@ -27,7 +27,7 @@ public enum StatusProjetoEnum {
     }
 
     // Getter para o value
-    public String getValue() {
+    public Integer getValue() {
         return value;
     }
 

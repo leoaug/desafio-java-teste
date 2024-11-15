@@ -55,7 +55,7 @@ public class Projeto implements Serializable {
 	private Double orcamento;
 
 	@ManyToOne
-	@JoinColumn(name = "id", referencedColumnName = "id")
+	@JoinColumn(name = "idgerente", referencedColumnName = "id")
 	private Pessoa gerente;
 
 }
