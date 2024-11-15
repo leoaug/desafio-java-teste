@@ -1,0 +1,47 @@
+
+server.port: ${SERVER_PORT:8081}
+ 
+#################
+# GENERAL
+#################
+
+spring:
+  application: 
+    name: desafiojava
+  mvc:
+    view:
+      prefix: '/WEB-INF/jsp/'
+      suffix: '.jsp'
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    url: jdbc:postgresql://${DB_URL:localhost}:${DB_PORT:5432}/${DB_NAME:postgres}
+    usuario: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:334863333}
+    driver-class-name: org.postgresql.Driver
+    jndi-name: ${JNDI_NAME:jdbc/desafioJava}
+  jpa:
+    properties:
+      hibernate:
+        ddl-auto: none
+        show_sql: true
+        use_sql_comments: true
+        format_sql: true
+        type: trace 
+  sql:
+    init:
+      mode: always
+logging:
+  level:
+    org:
+      hibernate:
+        type: trace
+   
+server:
+  servlet:
+    session:
+      cookie: 
+        same-site:
+          lax
+
+  
