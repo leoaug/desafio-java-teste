@@ -19,7 +19,7 @@ import br.com.desafiojava.constants.RiscoProjetoEnum;
 import br.com.desafiojava.constants.StatusProjetoEnum;
 import lombok.Getter;
 import lombok.Setter;
-
+ 
 @Entity
 @Table(name = "PROJETO", schema = DesafioJavaConstants.DESAFIO_JAVA_SCHEMA)
 @Getter
