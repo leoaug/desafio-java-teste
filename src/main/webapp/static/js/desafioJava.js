@@ -23,3 +23,16 @@ function convertStringToFloat(valor) {
 	const normalizedString = cleanedString.replace('.', '').replace(',', '.');
 	return parseFloat(normalizedString);
 }
+
+function buildUrl(baseUrl, params) {
+    const urlParams = new URLSearchParams();
+
+    // Itera sobre o array de parâmetros e adiciona à URL
+    params.forEach(param => {
+        if (param.value) {
+            urlParams.append(param.key, param.value);
+        }
+    });
+    // Retorna a URL completa com os parâmetros
+    return baseUrl + "?" + urlParams.toString();
+}

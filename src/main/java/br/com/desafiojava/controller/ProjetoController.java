@@ -1,5 +1,6 @@
 package br.com.desafiojava.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -10,10 +11,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.desafiojava.exception.DesafioJavaException;
 import br.com.desafiojava.jpa.filter.ProjetoFilter;
+import br.com.desafiojava.model.Pessoa;
 import br.com.desafiojava.model.Projeto;
 import br.com.desafiojava.service.PessoaService;
 import br.com.desafiojava.service.ProjetoService;
@@ -30,10 +33,14 @@ public class ProjetoController {
 	
 
 	@GetMapping("index")
-	public String index(Model model) {
-		model.addAttribute("projetos", projetoService.getAll());		
-        model.addAttribute("gerentes", pessoaService.findByGerente(Boolean.TRUE));
+	public String index(Model model) {		
+        this.inicializarConsulta(model,projetoService.getAll(),pessoaService.findByGerente(Boolean.TRUE));
 		return "projeto/manterProjeto";
+	}
+
+	private void inicializarConsulta(Model model, List<Projeto> projetos, List<Pessoa> pessoas) {
+		model.addAttribute("projetos", projetos);		
+        model.addAttribute("gerentes", pessoas);		
 	}
 
 	@PostMapping("salvar")
@@ -55,15 +62,21 @@ public class ProjetoController {
 		return projetoService.getById(id);
 	}
 	
-	@PostMapping("/consultar")
-	public List<Projeto> consultar(@RequestBody Projeto projeto) {
+	@GetMapping("/consultar")
+	public String consultar(@RequestParam(required = false)  String nome,
+							@RequestParam(required = false)  Date dataInicio,
+							@RequestParam(required = false)  Integer risco,
+							@RequestParam(required = false)  Integer status,Model model) {
 
 		ProjetoFilter filter = new ProjetoFilter ();
-		filter.setNome(projeto.getNome());
-		filter.setDataInicio(projeto.getDataInicio());
-		filter.setRisco(projeto.getRisco());
-		filter.setStatus(projeto.getStatus());
+		filter.setNome(nome);
+		filter.setDataInicio(dataInicio);
+		filter.setRisco(risco);
+		filter.setStatus(status);
 
-		return projetoService.buscarProjetosFiltrados(filter);
+		this.inicializarConsulta(model,projetoService.buscarProjetosFiltrados(filter),pessoaService.findByGerente(Boolean.TRUE));
+
+		return "projeto/manterProjeto";
+
 	}
 }
