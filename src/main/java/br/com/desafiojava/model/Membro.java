@@ -33,5 +33,9 @@ public class Membro implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "idprojeto", referencedColumnName = "id")
 	private Projeto projeto;
+	
+	@ManyToOne
+	@JoinColumn(name = "idfuncionario", referencedColumnName = "id")
+	private Pessoa funcionario;
 
 }

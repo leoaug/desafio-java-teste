@@ -158,7 +158,9 @@
        
         // Criar novo projeto
         $('#salvarProjeto').click(function() {
-           
+
+        	$('#loadingDialog')[0].showModal();
+            
             var projeto = {
 				id: $('#id').val(),
                 nome: $('#nome').val(),
@@ -190,13 +192,22 @@
 
         // Excluir projeto
         $(document).on('click', '.btn-excluir', function() {
+        	$('#loadingDialog')[0].showModal();
             var id = $(this).data('id');
             $.ajax({
                 url: '/projeto/excluir/' + id,
                 method: 'DELETE',
                 success: function() {
                 	window.location.href = '/projeto/index'; 
-                }
+                },  
+                error: function (xhr, status, error) {
+                	// Captura o erro e exibe no dialog
+                	$('#loadingDialog')[0].close();
+                    const errorMessage = `Erro: ${xhr.status} - ${xhr.statusText}`;
+                    $('#errorMessage').text("Erro ao excluir, projeto já vinculado ao membro");
+                    $('#errorDialog')[0].showModal();
+                    console.log(JSON.stringify(error));
+                },
             });
         });
 

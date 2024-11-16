@@ -3,18 +3,17 @@ package br.com.desafiojava.service;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.desafiojava.exception.DesafioJavaException;
 import br.com.desafiojava.jpa.repository.PessoaRepository;
 import br.com.desafiojava.model.Pessoa;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 
 @Service
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class PessoaService {
 
-	@Autowired
 	private PessoaRepository pessoaRepository;
 	
 	 // Criar ou Atualizar Pessoa
@@ -28,12 +27,12 @@ public class PessoaService {
     }
 
     // Atualizar Pessoa (usando merge)
-    public Pessoa update(Long id, Pessoa pessoa) {
+    public Pessoa update(Long id, Pessoa pessoa) throws DesafioJavaException {
         if (pessoaRepository.existsById(id)) {
         	pessoa.setId(id);
             return pessoaRepository.save(pessoa);
         } else {
-            throw new RuntimeException("Produto não encontrado com ID: " + id);
+            throw new DesafioJavaException("Produto não encontrado com ID: " + id);
         }
     }
 
@@ -50,5 +49,8 @@ public class PessoaService {
     
     public List<Pessoa> findByGerente(Boolean gerente) {
     	return pessoaRepository.findByGerente(gerente);
+    }
+    public List<Pessoa> findByFuncionario(Boolean funcionario) {
+    	return pessoaRepository.findByFuncionario(funcionario);
     }
 }

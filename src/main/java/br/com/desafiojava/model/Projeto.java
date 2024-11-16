@@ -12,13 +12,17 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import br.com.desafiojava.constants.DesafioJavaConstants;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "PROJETO", schema = DesafioJavaConstants.DESAFIO_JAVA_SCHEMA)
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Projeto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -46,5 +50,7 @@ public class Projeto implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "idgerente", referencedColumnName = "id")
 	private Pessoa gerente;
+
+
 
 }

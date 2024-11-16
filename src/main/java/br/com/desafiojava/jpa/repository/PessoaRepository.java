@@ -11,4 +11,6 @@ public interface PessoaRepository extends JpaRepository<Pessoa, Long> {
 
 	 // Consulta personalizada para buscar pessoas pelo gerente
     List <Pessoa> findByGerente(Boolean gerente);
+    
+    List <Pessoa> findByFuncionario(Boolean funcionario);
 }

@@ -5,11 +5,14 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,8 +20,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.MockedStatic;
 import org.mockito.MockitoAnnotations;
+import org.springframework.data.jpa.domain.Specification;
 
+import br.com.desafiojava.exception.DesafioJavaException;
+import br.com.desafiojava.jpa.especification.ProjetoSpecification;
+import br.com.desafiojava.jpa.filter.ProjetoFilter;
 import br.com.desafiojava.jpa.repository.ProjetoRepository;
 import br.com.desafiojava.model.Projeto;
 
@@ -29,6 +37,12 @@ class ProjetoServiceTest {
 
     @InjectMocks
     private ProjetoService projetoService;
+    
+    @Mock
+    private ProjetoFilter projetoFilter;
+
+    @Mock
+    private Specification<Projeto> specification;
 
     private Projeto projeto;
 
@@ -67,7 +81,7 @@ class ProjetoServiceTest {
     }
 
     @Test
-    void testUpdate() {
+    void testUpdate() throws DesafioJavaException {
         // Configurando o comportamento do mock
         when(projetoRepository.existsById(1L)).thenReturn(true);
         when(projetoRepository.save(any(Projeto.class))).thenReturn(projeto);
@@ -87,7 +101,7 @@ class ProjetoServiceTest {
         when(projetoRepository.existsById(1L)).thenReturn(false);
 
         // Chamando o método de atualização e verificando se a exceção é lançada
-        RuntimeException thrown = assertThrows(RuntimeException.class, () -> {
+        DesafioJavaException thrown = assertThrows(DesafioJavaException.class, () -> {
             projetoService.update(1L, projeto);
         });
 
@@ -137,6 +151,37 @@ class ProjetoServiceTest {
         assertNotNull(allProjetos);
         assertEquals(1, allProjetos.size());
         assertEquals("Projeto Teste", allProjetos.get(0).getNome());
+    }
+    
+    @SuppressWarnings("unchecked")
+    @Test
+    void testBuscarProjetosFiltrados() {
+        // Dados simulados
+        Projeto projeto1 = new Projeto(1L, "Projeto 1", null, null, null, null, null, null, null, null);
+        Projeto projeto2 = new Projeto(2L, "Projeto 2", null, null, null, null, null, null, null, null);
+        List<Projeto> listaProjetos = Arrays.asList(projeto1, projeto2);
+
+        // Usando mockStatic para simular o comportamento estático
+        try (MockedStatic<ProjetoSpecification> mockedStatic = mockStatic(ProjetoSpecification.class)) {
+            
+			Specification<Projeto> specification = mock(Specification.class);
+            mockedStatic.when(() -> ProjetoSpecification.comFiltros(projetoFilter)).thenReturn(specification);
+
+            // Quando o repositório for chamado com a Specification
+            when(projetoRepository.findAll(specification)).thenReturn(listaProjetos);
+
+            // Chamada do método a ser testado
+            List<Projeto> projetos = projetoService.buscarProjetosFiltrados(projetoFilter);
+
+            // Verificar se o método findAll foi chamado uma vez com a Specification
+            verify(projetoRepository, times(1)).findAll(specification);
+
+            // Verificar o retorno
+            assertNotNull(projetos);
+            assertEquals(2, projetos.size());
+            assertEquals("Projeto 1", projetos.get(0).getNome());
+            assertEquals("Projeto 2", projetos.get(1).getNome());
+        }
     }
 
 }

@@ -11,3 +11,14 @@
 .form-group-inline input {
 	flex: 1; /* Makes inputs take equal space */
 }
+
+dialog {
+	border: none;
+	border-radius: 8px;
+	padding: 20px;
+	text-align: center;
+	background-color: gray;
+	color: white;
+	font-size: 18px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
