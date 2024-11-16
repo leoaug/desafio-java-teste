@@ -32,7 +32,7 @@ import br.com.desafiojava.model.Projeto;
 
 class ProjetoServiceTest {
 
-	@Mock
+	@Mock 
     private ProjetoRepository projetoRepository;
 
     @InjectMocks
