@@ -141,7 +141,7 @@ class ProjetoControllerTest {
 	}
 
 	@Test
-	public void testEditarProjeto() throws Exception {
+	void testEditarProjeto() throws Exception {
 		when(projetoService.getById(1L)).thenReturn(projeto);
 
 		mockMvc.perform(get("/projeto/editar/1")).andExpect(status().isOk())

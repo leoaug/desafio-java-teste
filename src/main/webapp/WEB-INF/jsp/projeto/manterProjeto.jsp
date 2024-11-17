@@ -16,7 +16,7 @@
 	    <!-- consulta de Projetos -->
 		<%@ include file="/WEB-INF/jsp/projeto/pesquisarProjeto.jsp" %>
 	    
-	    <button class="btn btn-success mb-3" data-toggle="modal" data-target="#modalNovoProjeto">Novo Projeto</button>
+	    <button class="btn btn-success mb-3" data-toggle="modal" onclick="$('#modalNovoProjeto')[0].showModal()">Novo Projeto</button>
 	
 	    <table id="tabelaProjetos" class="table table-bordered">
 	        <thead>
@@ -83,8 +83,7 @@
 </div>
 	
 <!-- Modal Novo Projeto -->
-<div class="modal fade" id="modalNovoProjeto" tabindex="-1" role="dialog" aria-labelledby="modalNovoProjetoLabel" aria-hidden="true">
-	    <div class="modal-dialog" role="document" style="width: 600px !important">
+	<dialog id="modalNovoProjeto" style="width:70%">
 	        <div class="modal-content">
 	            <div class="modal-header">
 	                <h5 class="modal-title" id="modalNovoProjetoLabel">Novo Projeto</h5>
@@ -95,72 +94,87 @@
 	            <div class="modal-body">
 	                <form id="formNovoProjeto">
 	                	<input type="hidden" id="id" />
-	                    <div class="form-group">
-	                        <label for="nome">Nome</label>
-	                        <input type="text" class="form-control" id="nome" required>
-	                    </div>
-	                    <div class="form-group-inline">
-	                    	 <label for="dataInicio">Data Início</label>
-	    					 <input type="date" class="form-control" id="dataInicio" required>
+	                	
+	                	 <div class="row mb-4">
+			                <!-- Campo Nome -->
+			                <div class="col-md-12">
+			                	  <label for="nome" style="float:left">Nome</label>
+	                        	  <input type="text" class="form-control" id="nome" required>
+			                </div>
+			             </div>
+	                	
+	                    <div class="row mb-4">
+	                    	 <div class="col-md-3">
+		                    	 <label for="dataInicio" style="float:left">Data Início</label>
+		    					 <input type="date" class="form-control" id="dataInicio" required>
+		    				 </div>
 	    					 
-	    					 <label for="dataFim">Data Fim</label>
-	    					 <input type="date" class="form-control" id="dataFim" required>
+	    					 <div class="col-md-3">
+	    					 	<label for="dataFim" style="float:left">Data Fim</label>
+	    					 	<input type="date" class="form-control" id="dataFim" required>
+	    					 </div>
+	    					 
+	    					 <div class="col-md-3">
+	                        	<label for="dataFim" style="float:left">Data Previsão</label>
+	                        	<input type="date" class="form-control" id="dataPrevisao" required>
+	                         </div>
+	                         
+	                          <div class="col-md-3">
+	                        	<label for="orcamento" style="float:left">Orçamento</label>
+	                        	<input type="text" class="form-control"  id="orcamento" required>
+	                          </div>
 	                    </div>
 	                    
-	                    <div class="form-group-inline">
-	                        <label for="dataFim">Data Previsão</label>
-	                        <input type="date" class="form-control" id="dataPrevisao" required>
-	                        
-	                        <label for="orcamento">Orçamento</label>
-	                        <input type="text" class="form-control"  id="orcamento" required>
-	                    </div>
 	                    
 	                    
-	                   	<div class="form-group"> 
-	                   	    <label for="descricao">Descrição:</label>
-	    					<textarea id="descricao" class="form-control" rows="5" cols="25" placeholder="Digite a descrição"></textarea>
+	                   	<div class="row mb-4">
+	                   		<div class="col-md-12">
+	                   	    	<label for="descricao" style="float:left">Descrição:</label>
+	    						<textarea id="descricao" class="form-control" rows="5" cols="25" placeholder="Digite a descrição"></textarea>
+	                   		</div>
 	                   	</div>
 	
 	   
-	                    <div class="form-group">	                   
-	                    	<label for="risco">Gerente</label>
-	                        <select class="form-select" id="gerente">
-	                        	<c:forEach var="gerente" items="${gerentes}">
-	                            	<option value="${gerente.id}">${gerente.nome}</option>
-	                            </c:forEach>	                           
-	                        </select>                 
+	                    <div class="row mb-4">	  
+	                    	<div class="col-md-4">                 
+		                    	<label for="risco" style="float:left">Gerente</label>
+		                        <select class="form-select" id="gerente">
+		                        	<c:forEach var="gerente" items="${gerentes}">
+		                            	<option value="${gerente.id}">${gerente.nome}</option>
+		                            </c:forEach>	                           
+		                        </select>  
+		                    </div>    
+		                    <div class="col-md-2">  
+		                    	 <label for="risco" style="float:left">Risco</label>
+		                        <select class="form-select" id="risco">
+		                            <option value="1">Baixo</option>
+		                            <option value="2">Médio</option>
+		                            <option value="3">Alto</option>
+		                        </select>
+		                    </div>  
+		                    <div class="col-md-3">  
+		                        <label for="status" style="float:left">Status</label>
+		                        <select class="form-select" id="status">
+		                            <option value="1">Em Análise</option>
+		                            <option value="2">Análise Realizada</option>
+		                            <option value="3">Análise Aprovada</option>
+		                            <option value="4">Iniciado</option>
+		                            <option value="5">Planejado</option>
+		                            <option value="6">Em Andamento</option>
+		                            <option value="7">Encerrado</option>
+		                            <option value="8">Cancelado</option>
+		                        </select>
+		                      </div>         
 		                </div>
 	                    
-	                    <div class="form-group">
-	                        <label for="risco">Risco</label>
-	                        <select class="form-select" id="risco">
-	                            <option value="1">Baixo</option>
-	                            <option value="2">Médio</option>
-	                            <option value="3">Alto</option>
-	                        </select>
-	                    </div>
-	                    <div class="form-group">
-	                        <label for="status">Status</label>
-	                        <select class="form-select" id="status">
-	                            <option value="1">Em Análise</option>
-	                            <option value="2">Análise Realizada</option>
-	                            <option value="3">Análise Aprovada</option>
-	                            <option value="4">Iniciado</option>
-	                            <option value="5">Planejado</option>
-	                            <option value="6">Em Andamento</option>
-	                            <option value="7">Encerrado</option>
-	                            <option value="8">Cancelado</option>
-	                        </select>
-	                    </div>
 	                </form>
 	            </div>
 	            <div class="modal-footer">
-	                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+	                <button type="button" class="btn btn-secondary" onclick="$('#modalNovoProjeto')[0].close()">Fechar</button>
 	                <button type="button" class="btn btn-primary" id="salvarProjeto">Salvar</button>
 	            </div>
 	        </div>
-	    </div>
-	</div>
+	  </dialog> 
 	
 	<script>
 	    $(document).ready(function() {
@@ -193,7 +207,7 @@
 	                contentType: 'application/json',
 	                data: JSON.stringify(projeto),
 	                success: function() {
-	                    $('#modalNovoProjeto').modal('hide');
+	                	$('#modalNovoProjeto')[0].close();
 	                    window.location.href = '/projeto/index'; 
 	                }
 	            });
@@ -251,7 +265,7 @@
 	                    $('#risco').val(projeto.risco);
 	                    $('#status').val(projeto.status);
 	                    $('#gerente').val(projeto.gerente.id);
-	                    $('#modalNovoProjeto').modal('show');
+	                    $('#modalNovoProjeto')[0].showModal();
 	                }
 	            });
 	        });

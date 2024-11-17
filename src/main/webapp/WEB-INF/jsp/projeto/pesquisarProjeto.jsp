@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+<head>
+	<title>Pagina de Pesquisa</title>
+</head>
 <div class="container mt-5">
   <fieldset class="border p-4">
      <legend class="w-auto">Filtros</legend>	
