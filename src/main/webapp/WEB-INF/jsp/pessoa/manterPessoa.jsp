@@ -15,7 +15,7 @@
   	 <div class="card-body">
 	    <h5 class="card-title">Gerente/Funcionário</h5>
 	    
-	    <button class="btn btn-success mb-3" data-toggle="modal" data-target="#modalNovoPessoa">Novo Gerente/Funcionário</button>
+	    <button class="btn btn-success mb-3" data-toggle="modal" onclick="$('#modalNovoPessoa')[0].showModal()">Novo Gerente/Funcionário</button>
 	
 	    <table id="tabelapessoas" class="table table-bordered">
 	        <thead>
@@ -65,12 +65,11 @@
 </div>
 	
 <!-- Modal Novo Pessoa -->
-<div class="modal fade" id="modalNovoPessoa" tabindex="-1" role="dialog" aria-labelledby="modalNovoPessoaLabel" aria-hidden="true">
-	    <div class="modal-dialog" role="document" style="width: 600px !important">
+		<dialog id="modalNovoPessoa" style="width:70%">
 	        <div class="modal-content">
 	            <div class="modal-header">
 	                <h5 class="modal-title" id="modalNovoPessoaLabel">Novo Pessoa</h5>
-	                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+	                <button type="button" class="close" onclick="$('#modalNovoPessoa')[0].showModal()" aria-label="Fechar">
 	                    <span aria-hidden="true">&times;</span>
 	                </button>
 	            </div>
@@ -120,12 +119,11 @@
 	                </form>
 	            </div>
 	            <div class="modal-footer">
-	                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+	                <button type="button" class="btn btn-secondary" onclick="$('#modalNovoPessoa')[0].close()">Fechar</button>
 	                <button type="button" class="btn btn-primary" id="salvarPessoa">Salvar</button>
 	            </div>
-	        </div>
-	    </div>
-	</div>
+	     </div>	
+	</dialog>
 	
 	<script>
 	    $(document).ready(function() {
@@ -153,7 +151,7 @@
 	                contentType: 'application/json',
 	                data: JSON.stringify(pessoa),
 	                success: function() {
-	                    $('#modalNovoPessoa').modal('hide');
+	                	$('#modalNovoPessoa')[0].close();
 	                    window.location.href = '/pessoa/index'; 
 	                }
 	            });
@@ -200,7 +198,7 @@
 	                    pessoa.funcionario === true ? $("#funcionario").prop("checked", true) : $("#funcionario").prop("checked", false);
 	                    pessoa.gerente === true ? $("#gerente").prop("checked", true) : $("#gerente").prop("checked", false);
 	                    
-	                    $('#modalNovoPessoa').modal('show');
+	                    $('#modalNovoPessoa')[0].showModal();
 	                }
 	            });
 	        });

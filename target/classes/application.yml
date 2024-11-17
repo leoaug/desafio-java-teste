@@ -6,6 +6,7 @@ server.port: ${SERVER_PORT:8081}
 #################
 
 spring:
+  
   application: 
     name: desafiojava
   mvc:
@@ -31,6 +32,8 @@ spring:
   sql:
     init:
       mode: always
+  jackson:
+    time-zone: America/Sao_Paulo
 logging:
   level:
     org:

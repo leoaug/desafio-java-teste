@@ -3,7 +3,7 @@
 <%@ include file="/WEB-INF/jsp/template/header.jsp" %>
   <div class="container mt-4">
     <h2>Membros</h2>
-    <button class="btn btn-success mb-3" data-toggle="modal" data-target="#modalNovoMembro">Novo Membro</button>
+    <button class="btn btn-success mb-3" data-toggle="modal" onclick="$('#modalNovoMembro')[0].showModal()">Novo Membro</button>
 
     <table class="table table-bordered">
         <thead>
@@ -39,13 +39,12 @@
     </table>
 </div>
 
-<!-- Modal Novo Membro -->
-<div class="modal fade" id="modalNovoMembro" tabindex="-1" role="dialog" aria-labelledby="modalNovoMembroLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document" style="width: 600px !important">
+<!-- Modal Novo Projeto -->
+	<dialog id="modalNovoMembro" style="width:70%">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modalNovoMembroLabel">Novo Membro</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                <button type="button" class="close" onclick="$('#modalNovoMembro')[0].close()" aria-label="Fechar">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -84,12 +83,11 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-secondary" onclick="$('#modalNovoMembro')[0].close()">Fechar</button>
                 <button type="button" class="btn btn-primary" id="salvarMembro">Salvar</button>
             </div>
-        </div>
-    </div>
-</div>
+      </div>
+ </dialog>
 
 <script>
     $(document).ready(function() {
@@ -118,7 +116,7 @@
                 contentType: 'application/json',
                 data: JSON.stringify(Membro),
                 success: function() {
-                    $('#modalNovoMembro').modal('hide');
+                	$('#modalNovoMembro')[0].close();
                     window.location.href = '/membro/index'; 
                 }
             });
@@ -157,7 +155,7 @@
                     $('#atribuicao').val(membro.atribuicao);
                     $('#projeto').val(membro.projeto.id);
                     $('#funcionario').val(membro.funcionario.id);                  
-                    $('#modalNovoMembro').modal('show');
+                    $('#modalNovoMembro')[0].showModal();
                 }
             });
         });
