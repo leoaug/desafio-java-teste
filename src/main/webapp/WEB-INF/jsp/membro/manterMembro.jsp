@@ -64,7 +64,7 @@
 
 					<div class="form-group">	                   
                     	<label for="risco">Projeto</label>
-                        <select class="form-control" id="projeto">
+                        <select class="form-select" id="projeto">
                         	<c:forEach var="projeto" items="${projetos}">
                             	<option value="${projeto.id}">${projeto.nome}</option>
                             </c:forEach>	                           
@@ -73,7 +73,7 @@
    
                     <div class="form-group">	                   
                     	<label for="risco">Funcionário</label>
-                        <select class="form-control" id="funcionario">
+                        <select class="form-select" id="funcionario">
                         	<c:forEach var="funcionario" items="${funcionarios}">
                             	<option value="${funcionario.id}">${funcionario.nome}</option>
                             </c:forEach>	                           

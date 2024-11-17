@@ -27,11 +27,15 @@
 	        </button>
 	        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
 	            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-	                <li class="nav-item">
+	                <li class="nav-item custom">
 	                    <a class="nav-link active" aria-current="page" onclick="$('#loadingDialog')[0].showModal()" href="/projeto/index">Manter Projetos</a>
 	                </li>
-	                 <li class="nav-item">
+	                <li class="nav-item custom">
 	                    <a class="nav-link active" aria-current="page" onclick="$('#loadingDialog')[0].showModal()" href="/membro/index">Manter Membro</a>
+	                </li>
+	                
+	                <li class="nav-item custom">
+	                    <a class="nav-link active" aria-current="page" onclick="$('#loadingDialog')[0].showModal()" href="/pessoa/index">Manter Gerente/Funcionário</a>
 	                </li>
 	                
 	            </ul>

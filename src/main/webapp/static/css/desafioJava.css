@@ -22,3 +22,17 @@ dialog {
 	font-size: 18px;
 	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
+
+.nav-item.custom {
+	background-color: #f8f9fa; /* Fundo cinza claro */
+	border-radius: 5px; /* Cantos arredondados */
+}
+
+.nav-item.custom a.nav-link {
+	color: #007bff; /* Cor do texto azul */
+}
+
+.nav-item.custom a.nav-link:hover {
+	background-color: #007bff; /* Fundo azul no hover */
+	color: white; /* Cor do texto branca no hover */
+}

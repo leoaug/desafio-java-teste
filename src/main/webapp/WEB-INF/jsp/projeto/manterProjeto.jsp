@@ -124,7 +124,7 @@
 	   
 	                    <div class="form-group">	                   
 	                    	<label for="risco">Gerente</label>
-	                        <select class="form-control" id="gerente">
+	                        <select class="form-select" id="gerente">
 	                        	<c:forEach var="gerente" items="${gerentes}">
 	                            	<option value="${gerente.id}">${gerente.nome}</option>
 	                            </c:forEach>	                           
@@ -133,7 +133,7 @@
 	                    
 	                    <div class="form-group">
 	                        <label for="risco">Risco</label>
-	                        <select class="form-control" id="risco">
+	                        <select class="form-select" id="risco">
 	                            <option value="1">Baixo</option>
 	                            <option value="2">Médio</option>
 	                            <option value="3">Alto</option>
@@ -141,7 +141,7 @@
 	                    </div>
 	                    <div class="form-group">
 	                        <label for="status">Status</label>
-	                        <select class="form-control" id="status">
+	                        <select class="form-select" id="status">
 	                            <option value="1">Em Análise</option>
 	                            <option value="2">Análise Realizada</option>
 	                            <option value="3">Análise Aprovada</option>

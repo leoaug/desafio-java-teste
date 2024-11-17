@@ -3,6 +3,7 @@ package br.com.desafiojava.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import br.com.desafiojava.exception.DesafioJavaException;
@@ -44,7 +45,7 @@ public class PessoaService {
 
     // Buscar Todos os Produtos
     public List<Pessoa> getAll() {
-        return pessoaRepository.findAll();
+        return pessoaRepository.findAll(Sort.by(Sort.Order.asc("nome")));
     }
     
     public List<Pessoa> findByGerente(Boolean gerente) {
