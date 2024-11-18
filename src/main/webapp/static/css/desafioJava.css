@@ -36,3 +36,7 @@ dialog {
 	background-color: #007bff; /* Fundo azul no hover */
 	color: white; /* Cor do texto branca no hover */
 }
+
+.visited {
+    background-color: #f0f8ff; /* Light blue background for visited links */
+}

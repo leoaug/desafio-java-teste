@@ -17,6 +17,8 @@
 	    	    
 	    <!-- consulta de Projetos -->
 		<%@ include file="/WEB-INF/jsp/projeto/pesquisarProjeto.jsp" %>
+		
+		<br/>
 	    	
 	    <table id="tabelaProjetos" class="table table-bordered table-hover table-striped">
 	        <thead>

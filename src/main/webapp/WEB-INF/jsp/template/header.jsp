@@ -55,4 +55,6 @@
     </dialog>
 	
 	<dialog id="loadingDialog">Carregando...</dialog>
+	
+	<br/>
 
