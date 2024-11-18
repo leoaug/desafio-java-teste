@@ -11,7 +11,7 @@
   
   <div class="card">
   	 <div class="card-body">
-	    <h5 class="card-title">Projetos</h5>
+	    <h5 class="card-title">Projeto</h5>
 	    
 	    <button class="btn btn-success mb-3" data-toggle="modal" id="novoProjeto">Novo Projeto</button>
 	    	    
