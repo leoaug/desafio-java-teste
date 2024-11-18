@@ -17,7 +17,7 @@
 	    
 	    <button class="btn btn-success mb-3" data-toggle="modal" id="novaPessoa" >Novo Gerente/Funcionário</button>
 	
-	    <table id="tabelapessoas" class="table table-bordered">
+	    <table id="tabelapessoas" class="table table-bordered table-hover table-striped">
 	        <thead>
 	            <tr>
 	                <th>Nome</th>

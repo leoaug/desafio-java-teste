@@ -18,7 +18,7 @@
 	    
 	    <button class="btn btn-success mb-3" data-toggle="modal" id="novoProjeto">Novo Projeto</button>
 	
-	    <table id="tabelaProjetos" class="table table-bordered">
+	    <table id="tabelaProjetos" class="table table-bordered table-hover table-striped">
 	        <thead>
 	            <tr>
 	                <th>Nome</th>

@@ -8,7 +8,7 @@
 	    
 			    <button class="btn btn-success mb-3" data-toggle="modal" id="novoMembro" >Novo Membro</button>
 			
-			    <table class="table table-bordered">
+			    <table class="table table-bordered table-hover table-striped">
 			        <thead>
 			            <tr>
 			                <th>Nome</th>

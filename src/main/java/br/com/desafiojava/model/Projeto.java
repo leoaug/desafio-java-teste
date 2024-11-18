@@ -13,14 +13,12 @@ import javax.persistence.Table;
 
 import br.com.desafiojava.constants.DesafioJavaConstants;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
 @Table(name = "PROJETO", schema = DesafioJavaConstants.DESAFIO_JAVA_SCHEMA)
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Projeto implements Serializable {
