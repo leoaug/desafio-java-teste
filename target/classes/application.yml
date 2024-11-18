@@ -26,9 +26,9 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
-        format_sql: true     # Enables SQL formatting
-    show-sql: true           # Shows SQL statements in the console
-    format-sql: true
+        hbm2ddl.auto: update  # This will create the schema if it doesn't exist and will automatically update the database schema according to your JPA entities.
+        show_sql: true
+        format_sql: true
   sql:
     init:
       mode: always
