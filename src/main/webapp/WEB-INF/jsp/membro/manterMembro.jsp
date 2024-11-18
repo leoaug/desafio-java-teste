@@ -14,7 +14,8 @@
 			                <th>Nome</th>
 			                <th>Atribuição</th>
 			                <th>Projeto</th>
-			                <th>Funcionário</th>             
+			                <th>Funcionário</th>     
+			                <th>Gerente</th>          
 			                <th>Ações</th>
 			            </tr>
 			        </thead>
@@ -30,7 +31,11 @@
 			                    </td>
 			                    <td>                 	
 			                    	${membro.funcionario.nome}
-			                    </td>               
+			                    </td>    
+			                    
+			                     <td>                 	
+			                    	${membro.projeto.gerente.nome}
+			                    </td>            
 			                   
 			                    <td style="width: 105px;">
 			                        <button class="btn btn-info rounded-circle btn-editar" data-id="${membro.id}" title="Editar">
