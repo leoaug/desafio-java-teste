@@ -3,6 +3,7 @@ package br.com.desafiojava.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import br.com.desafiojava.exception.DesafioJavaException;
@@ -44,6 +45,6 @@ public class MembroService {
 
     // Buscar Todos os Membros
     public List<Membro> getAll() {
-        return membroRepository.findAll();
+        return membroRepository.findAll(Sort.by(Sort.Order.asc("nome")));
     }
 }

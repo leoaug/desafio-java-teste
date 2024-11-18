@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import javax.persistence.PersistenceException;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -47,10 +48,10 @@ public class ProjetoService {
 		return produto.orElseThrow(() -> new RuntimeException("Projeto não encontrado com ID: " + id));
 	}
 
-	// Buscar Todos os Projetos
-	public List<Projeto> getAll() {
-		return projetoRepository.findAll();
-	}
+	 // Buscar Todos os Produtos
+    public List<Projeto> getAll() {
+        return projetoRepository.findAll(Sort.by(Sort.Order.asc("nome")));
+    }
 
 	public List<Projeto> buscarProjetosFiltrados(ProjetoFilter filter) {
 		Specification<Projeto> specification = ProjetoSpecification.comFiltros(filter);
