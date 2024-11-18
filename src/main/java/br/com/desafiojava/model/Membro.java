@@ -11,13 +11,17 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import br.com.desafiojava.constants.DesafioJavaConstants;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "MEMBRO", schema = DesafioJavaConstants.DESAFIO_JAVA_SCHEMA)
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Membro implements Serializable {
 
 	private static final long serialVersionUID = 1L;

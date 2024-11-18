@@ -29,6 +29,7 @@
 	                <th>Gerente</th>
 	                <th>Risco</th>
 	                <th>Status</th>
+	                <th>Descrição</th>
 	                <th>Ações</th>
 	            </tr>
 	        </thead>
@@ -68,6 +69,7 @@
 					            <c:otherwise>Cancelado</c:otherwise>
 	      					</c:choose>
 	                    </td>
+	                     <td>${projeto.descricao}</td>
 	                    <td>
 	                        <button class="btn btn-info btn-editar" data-id="${projeto.id}">Editar</button>
 	                        <c:if test="${!(projeto.status eq '4' || projeto.status eq '6' || projeto.status eq '7')}">                       
@@ -99,29 +101,29 @@
 			                <!-- Campo Nome -->
 			                <div class="col-md-12">
 			                	  <label for="nomeProjeto" style="float:left">Nome</label>
-	                        	  <input type="text" class="form-control" id="nomeProjeto" required>
+	                        	  <input type="text" class="form-control" id="nomeProjeto" class="required">
 			                </div>
 			             </div>
 	                	
 	                    <div class="row mb-4">
 	                    	 <div class="col-md-3">
 		                    	 <label for="dataInicioProjeto" style="float:left">Data Início</label>
-		    					 <input type="date" class="form-control" id="dataInicioProjeto" required>
+		    					 <input type="date" class="form-control" id="dataInicioProjeto" class="required">
 		    				 </div>
 	    					 
 	    					 <div class="col-md-3">
 	    					 	<label for="dataFim" style="float:left">Data Fim</label>
-	    					 	<input type="date" class="form-control" id="dataFim" required>
+	    					 	<input type="date" class="form-control" id="dataFim" class="required">
 	    					 </div>
 	    					 
 	    					 <div class="col-md-3">
 	                        	<label for="dataFim" style="float:left">Data Previsão</label>
-	                        	<input type="date" class="form-control" id="dataPrevisao" required>
+	                        	<input type="date" class="form-control" id="dataPrevisao" class="required">
 	                         </div>
 	                         
 	                          <div class="col-md-3">
 	                        	<label for="orcamento" style="float:left">Orçamento</label>
-	                        	<input type="text" class="form-control"  id="orcamento" required>
+	                        	<input type="text" class="form-control"  id="orcamento" class="required">
 	                          </div>
 	                    </div>
 	                    
@@ -130,7 +132,7 @@
 	                   	<div class="row mb-4">
 	                   		<div class="col-md-12">
 	                   	    	<label for="descricao" style="float:left">Descrição:</label>
-	    						<textarea id="descricao" class="form-control" rows="5" cols="25" placeholder="Digite a descrição"></textarea>
+	    						<textarea id="descricao" class="form-control" rows="5" cols="25" class="required" placeholder="Digite a descrição"></textarea>
 	                   		</div>
 	                   	</div>
 	
@@ -138,7 +140,7 @@
 	                    <div class="row mb-4">	  
 	                    	<div class="col-md-4">                 
 		                    	<label for="risco" style="float:left">Gerente</label>
-		                        <select class="form-select" id="gerente">
+		                        <select class="form-select" id="gerente" class="required">
 		                        	<c:forEach var="gerente" items="${gerentes}">
 		                            	<option value="${gerente.id}">${gerente.nome}</option>
 		                            </c:forEach>	                           
@@ -146,7 +148,8 @@
 		                    </div>    
 		                    <div class="col-md-2">  
 		                    	 <label for="risco" style="float:left">Risco</label>
-		                        <select class="form-select" id="riscoProjeto">
+		                        <select class="form-select" id="riscoProjeto" class="required">
+		                         	<option value="">Selecione o risco</option>
 		                            <option value="1">Baixo</option>
 		                            <option value="2">Médio</option>
 		                            <option value="3">Alto</option>
@@ -154,7 +157,8 @@
 		                    </div>  
 		                    <div class="col-md-3">  
 		                        <label for="status" style="float:left">Status</label>
-		                        <select class="form-select" id="statusProjeto">
+		                        <select class="form-select" id="statusProjeto" class="required">
+		                        	<option value="">Selecione o status</option>
 		                            <option value="1">Em Análise</option>
 		                            <option value="2">Análise Realizada</option>
 		                            <option value="3">Análise Aprovada</option>
@@ -182,35 +186,40 @@
 	        // Criar novo projeto
 	        $('#salvarProjeto').click(function() {
 	
-	        	$('#loadingDialog')[0].showModal();
-	            
-	            var projeto = {
-					id: $('#id').val(),
-	                nome: $('#nomeProjeto').val(),
-	                dataInicio: $('#dataInicioProjeto').val(),
-	                dataFim: $('#dataFim').val(),
-	                dataPrevisao : $('#dataPrevisao').val(),
-	                gerente: {
-						id: parseInt($('#gerente').val(),10),
-						nome: $('#gerente').text()
-	                },
-	                orcamento : convertStringToFloat($('#orcamento').val()) ,
-	                descricao : $('#descricao').val(),
-	                risco: $('#riscoProjeto').val(),
-	                status: $('#statusProjeto').val()
-	                                     
-	            };
-	            
-	            $.ajax({
-	                url: '/projeto/salvar',
-	                method: 'POST',
-	                contentType: 'application/json',
-	                data: JSON.stringify(projeto),
-	                success: function() {
-	                	$('#modalNovoProjeto')[0].close();
-	                    window.location.href = '/projeto/index'; 
-	                }
-	            });
+	        	let isValido = validarCampos();
+        	 
+				if(isValido){
+
+					$('#loadingDialog')[0].showModal();
+		            
+		            var projeto = {
+						id: $('#id').val(),
+		                nome: $('#nomeProjeto').val(),
+		                dataInicio: $('#dataInicioProjeto').val(),
+		                dataFim: $('#dataFim').val(),
+		                dataPrevisao : $('#dataPrevisao').val(),
+		                gerente: {
+							id: parseInt($('#gerente').val(),10),
+							nome: $('#gerente').text()
+		                },
+		                orcamento : convertStringToFloat($('#orcamento').val()) ,
+		                descricao : $('#descricao').val(),
+		                risco: $('#riscoProjeto').val(),
+		                status: $('#statusProjeto').val()
+		                                     
+		            };
+		            
+		            $.ajax({
+		                url: '/projeto/salvar',
+		                method: 'POST',
+		                contentType: 'application/json',
+		                data: JSON.stringify(projeto),
+		                success: function() {
+		                	$('#modalNovoProjeto')[0].close();
+		                    window.location.href = '/projeto/index'; 
+		                }
+		            });
+				}
 	        });
 	
 	        // Excluir projeto
@@ -270,6 +279,33 @@
 	            });
 	        });
 	    });
+
+	    function validarCampos(){
+	    	 // IDs dos campos obrigatórios
+            const requiredFields = ["nomeProjeto", "dataInicioProjeto", "dataFim", "dataPrevisao","orcamento","descricao","riscoProjeto","statusProjeto","gerente"];
+            let isValid = true; // Controle de validade geral
+            const errorMessage = document.getElementById("errorMessage");
+
+            // Resetar estilos de erro
+            requiredFields.forEach((id) => {
+                const field = document.getElementById(id);
+                if(field.value.trim() === ''){
+                	field.style.border = "2px solid red";
+                	isValid = false;
+	            } else {
+	            	field.style.border = "";
+		        }
+            });
+
+            // Exibir mensagem ou prosseguir
+            if (isValid) {
+                errorMessage.style.display = "none";             
+            } else {
+                errorMessage.style.display = "block";
+            }
+
+            return isValid;
+		}
 	</script>
   
 <%@ include file="/WEB-INF/jsp/template/footer.jsp" %>

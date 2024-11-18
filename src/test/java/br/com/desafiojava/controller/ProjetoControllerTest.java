@@ -128,7 +128,7 @@ class ProjetoControllerTest {
 
 	    // Verificando se os métodos do serviço foram chamados corretamente
 	    verify(projetoService, times(1)).update(eq(1L), any(Projeto.class)); // Garantindo que o método de atualização foi chamado
-	    verify(pessoaService, times(1)).getById(eq(1L)); // Garantindo que o método getById do gerente foi chamado
+	    verify(pessoaService, times(1)).getById(1L); // Garantindo que o método getById do gerente foi chamado
 	}
 
 	@Test

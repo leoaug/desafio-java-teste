@@ -1,42 +1,45 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ include file="/WEB-INF/jsp/template/header.jsp" %>
-  <div class="container mt-4">
-    <h2>Membros</h2>
-    <button class="btn btn-success mb-3" data-toggle="modal" onclick="$('#modalNovoMembro')[0].showModal()">Novo Membro</button>
-
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Nome</th>
-                <th>Atribuição</th>
-                <th>Projeto</th>
-                <th>Funcionário</th>             
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody id="tabelamembros">
-            <c:forEach var="membro" items="${membros}">
-                <tr>
-                    <td>${membro.nome}</td>
-                    <td>                    	
-                    	${membro.atribuicao}
-                    </td>
-                    <td>                   	
-                    	${membro.projeto.nome}
-                    </td>
-                    <td>                 	
-                    	${membro.funcionario.nome}
-                    </td>               
-                   
-                    <td>
-                        <button class="btn btn-info btn-editar" data-id="${membro.id}">Editar</button>
-                        <button class="btn btn-danger btn-excluir" data-id="${membro.id}">Excluir</button>                      
-                    </td>
-                </tr>
-            </c:forEach>
-        </tbody>
-    </table>
+ <div class="card">
+  	 <div class="card-body">
+	    <h5 class="card-title">Gerente/Funcionário</h5>
+    
+		    <button class="btn btn-success mb-3" data-toggle="modal" onclick="$('#modalNovoMembro')[0].showModal()">Novo Membro</button>
+		
+		    <table class="table table-bordered">
+		        <thead>
+		            <tr>
+		                <th>Nome</th>
+		                <th>Atribuição</th>
+		                <th>Projeto</th>
+		                <th>Funcionário</th>             
+		                <th>Ações</th>
+		            </tr>
+		        </thead>
+		        <tbody id="tabelamembros">
+		            <c:forEach var="membro" items="${membros}">
+		                <tr>
+		                    <td>${membro.nome}</td>
+		                    <td>                    	
+		                    	${membro.atribuicao}
+		                    </td>
+		                    <td>                   	
+		                    	${membro.projeto.nome}
+		                    </td>
+		                    <td>                 	
+		                    	${membro.funcionario.nome}
+		                    </td>               
+		                   
+		                    <td>
+		                        <button class="btn btn-info btn-editar" data-id="${membro.id}">Editar</button>
+		                        <button class="btn btn-danger btn-excluir" data-id="${membro.id}">Excluir</button>                      
+		                    </td>
+		                </tr>
+		            </c:forEach>
+		        </tbody>
+		    </table>
+	</div>
 </div>
 
 <!-- Modal Novo Projeto -->
@@ -51,33 +54,40 @@
             <div class="modal-body">
                 <form id="formNovoMembro">
                 	<input type="hidden" id="id" />
-                    <div class="form-group">
-                        <label for="nome">Nome</label>
-                        <input type="text" class="form-control" id="nome" required>
-                    </div>
-                  
-                   	<div class="form-group"> 
-                   	    <label for="atribuicao">Atribuição:</label>
-    					<textarea id="atribuicao" class="form-control" rows="5" cols="25" placeholder="Digite a atribuição"></textarea>
-                   	</div>
-
-					<div class="form-group">	                   
-                    	<label for="risco">Projeto</label>
-                        <select class="form-select" id="projeto">
-                        	<c:forEach var="projeto" items="${projetos}">
-                            	<option value="${projeto.id}">${projeto.nome}</option>
-                            </c:forEach>	                           
-                        </select>                 
-	                </div>
-   
-                    <div class="form-group">	                   
-                    	<label for="risco">Funcionário</label>
-                        <select class="form-select" id="funcionario">
-                        	<c:forEach var="funcionario" items="${funcionarios}">
-                            	<option value="${funcionario.id}">${funcionario.nome}</option>
-                            </c:forEach>	                           
-                        </select>                 
-	                </div>
+                	
+                	  <div class="row mb-4">
+                    	 <div class="col-md-6">
+                   	 	    <label for="nome" style="float: left">Nome</label>
+                       		<input type="text" class="form-control" id="nome" required>
+                    	 </div>
+                    	 
+                    	 <div class="col-md-6">
+                    	 	<label for="atribuicao" style="float: left">Atribuição:</label>
+    						<textarea id="atribuicao" class="form-control" rows="5" cols="25" placeholder="Digite a atribuição"></textarea>
+                    	 </div>
+	                  </div>
+                		
+                	  <div class="row mb-4">
+                    	 <div class="col-md-6">
+                    	 	<label for="risco" style="float: left">Projeto</label>
+	                        <select class="form-select" id="projeto">
+	                        	<c:forEach var="projeto" items="${projetos}">
+	                            	<option value="${projeto.id}">${projeto.nome}</option>
+	                            </c:forEach>	                           
+	                        </select>
+                    	 </div>
+                    	 
+                    	 <div class="col-md-6">
+                    	 	<label for="risco" style="float: left">Funcionário</label>
+	                        <select class="form-select" id="funcionario">
+	                        	<c:forEach var="funcionario" items="${funcionarios}">
+	                            	<option value="${funcionario.id}">${funcionario.nome}</option>
+	                            </c:forEach>	                           
+	                        </select> 
+                    	 </div>
+                      </div>
+                	
+                 
                     
                     
                 </form>
@@ -94,32 +104,39 @@
        
         // Criar novo Membro
         $('#salvarMembro').click(function() {
-           
-            var Membro = {
-				id: $('#id').val(),
-                nome: $('#nome').val(),      
-                atribuicao: $('#atribuicao').val(),        
-                funcionario: {
-					id: parseInt($('#funcionario').val(),10),
-					nome: $('#funcionario').text()
-                },
-                projeto: {
-					id: parseInt($('#projeto').val(),10),
-					nome: $('#projeto').text()
-                }
-                                     
-            };
-            
-            $.ajax({
-                url: '/membro/salvar',
-                method: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify(Membro),
-                success: function() {
-                	$('#modalNovoMembro')[0].close();
-                    window.location.href = '/membro/index'; 
-                }
-            });
+
+        	let isValido = validarCampos();
+        	 
+			if(isValido){
+
+        		$('#loadingDialog')[0].showModal();
+        	
+	            var membro = {
+					id: $('#id').val(),
+	                nome: $('#nome').val(),      
+	                atribuicao: $('#atribuicao').val(),        
+	                funcionario: {
+						id: parseInt($('#funcionario').val(),10),
+						nome: $('#funcionario').text()
+	                },
+	                projeto: {
+						id: parseInt($('#projeto').val(),10),
+						nome: $('#projeto').text()
+	                }
+	                                     
+	            };
+	            
+	            $.ajax({
+	                url: '/membro/salvar',
+	                method: 'POST',
+	                contentType: 'application/json',
+	                data: JSON.stringify(membro),
+	                success: function() {
+	                	$('#modalNovoMembro')[0].close();
+	                    window.location.href = '/membro/index'; 
+	                }
+	            });
+			}
         });
 
         // Excluir Membro
@@ -160,6 +177,34 @@
             });
         });
     });
+
+
+    function validarCampos(){
+        // IDs dos campos obrigatórios
+       const requiredFields = ["nome", "atribuicao", "projeto","funcionario"];
+       let isValid = true; // Controle de validade geral
+       const errorMessage = document.getElementById("errorMessage");
+
+       // Resetar estilos de erro
+       requiredFields.forEach((id) => {
+           const field = document.getElementById(id);
+           if(field.value.trim() === ''){
+               field.style.border = "2px solid red";
+               isValid = false;
+           } else {
+               field.style.border = "";
+           }
+       });
+
+       // Exibir mensagem ou prosseguir
+       if (isValid) {
+           errorMessage.style.display = "none";             
+       } else {
+           errorMessage.style.display = "block";
+       }
+
+       return isValid;
+   }
 </script>
   
 <%@ include file="/WEB-INF/jsp/template/footer.jsp" %>
