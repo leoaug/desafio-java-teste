@@ -13,11 +13,11 @@
   	 <div class="card-body">
 	    <h5 class="card-title">Projetos</h5>
 	    
+	    <button class="btn btn-success mb-3" data-toggle="modal" id="novoProjeto">Novo Projeto</button>
+	    	    
 	    <!-- consulta de Projetos -->
 		<%@ include file="/WEB-INF/jsp/projeto/pesquisarProjeto.jsp" %>
-	    
-	    <button class="btn btn-success mb-3" data-toggle="modal" id="novoProjeto">Novo Projeto</button>
-	
+	    	
 	    <table id="tabelaProjetos" class="table table-bordered table-hover table-striped">
 	        <thead>
 	            <tr>
