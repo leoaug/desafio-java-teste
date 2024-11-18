@@ -77,6 +77,7 @@
                     	 <div class="col-md-6">
                     	 	<label for="risco" style="float: left">Projeto</label>
 	                        <select class="form-select" id="projeto">
+	                        	<option value="">Selecione o Projeto</option>
 	                        	<c:forEach var="projeto" items="${projetos}">
 	                            	<option value="${projeto.id}">${projeto.nome}</option>
 	                            </c:forEach>	                           
@@ -86,6 +87,7 @@
                     	 <div class="col-md-6">
                     	 	<label for="risco" style="float: left">Funcionário</label>
 	                        <select class="form-select" id="funcionario">
+	                        	<option value="">Selecione o Funcionário</option>
 	                        	<c:forEach var="funcionario" items="${funcionarios}">
 	                            	<option value="${funcionario.id}">${funcionario.nome}</option>
 	                            </c:forEach>	                           
