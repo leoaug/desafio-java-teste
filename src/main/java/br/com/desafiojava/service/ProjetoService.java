@@ -38,7 +38,7 @@ public class ProjetoService {
 			projeto.setId(id);
 			return projetoRepository.save(projeto);
 		} else {
-			throw new DesafioJavaException("Produto não encontrado com ID: " + id);
+			throw new DesafioJavaException("Projeto não encontrado com ID: " + id);
 		}
 	}
 
