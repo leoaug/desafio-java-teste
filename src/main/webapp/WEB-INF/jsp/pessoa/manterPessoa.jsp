@@ -50,7 +50,7 @@
 					            <c:otherwise>Não</c:otherwise>
 	      					</c:choose>
 	                    </td>	                         
-	                    <td style="width: 105x;">
+	                    <td style="width: 105px;">
 	                        <button class="btn btn-info rounded-circle btn-editar" data-id="${pessoa.id}" title="Editar">
 	                        	<i class="fas fa-edit" ></i>
 	                         </button>

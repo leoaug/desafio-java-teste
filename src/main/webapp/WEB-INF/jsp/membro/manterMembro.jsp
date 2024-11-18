@@ -32,7 +32,7 @@
 			                    	${membro.funcionario.nome}
 			                    </td>               
 			                   
-			                    <td style="width: 105x;">
+			                    <td style="width: 105px;">
 			                        <button class="btn btn-info rounded-circle btn-editar" data-id="${membro.id}" title="Editar">
 			                        	<i class="fas fa-edit" ></i>
 			                         </button>
