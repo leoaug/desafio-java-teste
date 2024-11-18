@@ -98,15 +98,15 @@
 	                	 <div class="row mb-4">
 			                <!-- Campo Nome -->
 			                <div class="col-md-12">
-			                	  <label for="nome" style="float:left">Nome</label>
-	                        	  <input type="text" class="form-control" id="nome" required>
+			                	  <label for="nomeProjeto" style="float:left">Nome</label>
+	                        	  <input type="text" class="form-control" id="nomeProjeto" required>
 			                </div>
 			             </div>
 	                	
 	                    <div class="row mb-4">
 	                    	 <div class="col-md-3">
-		                    	 <label for="dataInicio" style="float:left">Data Início</label>
-		    					 <input type="date" class="form-control" id="dataInicio" required>
+		                    	 <label for="dataInicioProjeto" style="float:left">Data Início</label>
+		    					 <input type="date" class="form-control" id="dataInicioProjeto" required>
 		    				 </div>
 	    					 
 	    					 <div class="col-md-3">
@@ -146,7 +146,7 @@
 		                    </div>    
 		                    <div class="col-md-2">  
 		                    	 <label for="risco" style="float:left">Risco</label>
-		                        <select class="form-select" id="risco">
+		                        <select class="form-select" id="riscoProjeto">
 		                            <option value="1">Baixo</option>
 		                            <option value="2">Médio</option>
 		                            <option value="3">Alto</option>
@@ -154,7 +154,7 @@
 		                    </div>  
 		                    <div class="col-md-3">  
 		                        <label for="status" style="float:left">Status</label>
-		                        <select class="form-select" id="status">
+		                        <select class="form-select" id="statusProjeto">
 		                            <option value="1">Em Análise</option>
 		                            <option value="2">Análise Realizada</option>
 		                            <option value="3">Análise Aprovada</option>
@@ -186,8 +186,8 @@
 	            
 	            var projeto = {
 					id: $('#id').val(),
-	                nome: $('#nome').val(),
-	                dataInicio: $('#dataInicio').val(),
+	                nome: $('#nomeProjeto').val(),
+	                dataInicio: $('#dataInicioProjeto').val(),
 	                dataFim: $('#dataFim').val(),
 	                dataPrevisao : $('#dataPrevisao').val(),
 	                gerente: {
@@ -196,8 +196,8 @@
 	                },
 	                orcamento : convertStringToFloat($('#orcamento').val()) ,
 	                descricao : $('#descricao').val(),
-	                risco: $('#risco').val(),
-	                status: $('#status').val()
+	                risco: $('#riscoProjeto').val(),
+	                status: $('#statusProjeto').val()
 	                                     
 	            };
 	            
@@ -244,8 +244,8 @@
 	                	
 	                    // Aqui você pode preencher os campos de edição com os dados do projeto
 	                    $('#id').val(projeto.id);
-	                    $('#nome').val(projeto.nome);
-	                    $('#dataInicio').val(convertDateFormat(new Date(projeto.dataInicio).toLocaleDateString('pt-BR', {
+	                    $('#nomeProjeto').val(projeto.nome);
+	                    $('#dataInicioProjeto').val(convertDateFormat(new Date(projeto.dataInicio).toLocaleDateString('pt-BR', {
 	                	    day: '2-digit',
 	                	    month: '2-digit',
 	                	    year: 'numeric'
@@ -262,8 +262,8 @@
 	                    })));
 	                    $('#orcamento').val(convertMoney(projeto.orcamento));
 	                    $('#descricao').val(projeto.descricao);
-	                    $('#risco').val(projeto.risco);
-	                    $('#status').val(projeto.status);
+	                    $('#riscoProjeto').val(projeto.risco);
+	                    $('#statusProjeto').val(projeto.status);
 	                    $('#gerente').val(projeto.gerente.id);
 	                    $('#modalNovoProjeto')[0].showModal();
 	                }

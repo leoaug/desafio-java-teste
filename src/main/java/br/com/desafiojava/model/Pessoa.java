@@ -10,13 +10,17 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import br.com.desafiojava.constants.DesafioJavaConstants;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "PESSOA", schema = DesafioJavaConstants.DESAFIO_JAVA_SCHEMA)
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Pessoa implements Serializable {
 
 	private static final long serialVersionUID = 1L;

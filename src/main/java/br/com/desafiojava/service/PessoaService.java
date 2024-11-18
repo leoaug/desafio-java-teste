@@ -54,4 +54,6 @@ public class PessoaService {
     public List<Pessoa> findByFuncionario(Boolean funcionario) {
     	return pessoaRepository.findByFuncionario(funcionario);
     }
+
+	
 }

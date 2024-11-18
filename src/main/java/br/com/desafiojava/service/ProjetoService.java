@@ -20,7 +20,7 @@ import lombok.AllArgsConstructor;
 public class ProjetoService {
 
 	private ProjetoRepository projetoRepository;
-
+	
 	// Criar ou Atualizar Projeto
 	public Projeto save(Projeto projeto) {
 		return projetoRepository.save(projeto);
@@ -56,4 +56,5 @@ public class ProjetoService {
 		Specification<Projeto> specification = ProjetoSpecification.comFiltros(filter);
 		return projetoRepository.findAll(specification);
 	}
+	
 }

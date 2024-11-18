@@ -69,7 +69,7 @@
 	        <div class="modal-content">
 	            <div class="modal-header">
 	                <h5 class="modal-title" id="modalNovoPessoaLabel">Novo Pessoa</h5>
-	                <button type="button" class="close" onclick="$('#modalNovoPessoa')[0].showModal()" aria-label="Fechar">
+	                <button type="button" class="close" onclick="$('#modalNovoPessoa')[0].close()" aria-label="Fechar">
 	                    <span aria-hidden="true">&times;</span>
 	                </button>
 	            </div>
@@ -80,39 +80,35 @@
 	                	
 	                	 <div class="row mb-3">
 			                <!-- Campo Nome -->
-			                <div class="col-md-6">
-			                    <label for="nome" class="form-label">Nome</label>
+			                <div class="col-md-4">
+			                    <label for="nome" class="form-label" style="float: left">Nome</label>
 			                    <input type="text" class="form-control" id="nome" placeholder="Digite o nome">
 			                </div>
-			                <!-- Campo Data de Nascimento -->
-			                <div class="col-md-6">
-			                    <label for="dataNascimento" class="form-label">Data de Nascimento</label>
-			                    <input type="date" class="form-control" id="dataNascimento">
-			                </div>
-			            </div>
-			            <div class="row mb-3">
+			               
 			                <!-- Campo Gerente -->
-			                <div class="col-md-6">
-			                    <label for="gerente" class="form-label">Gerente</label>
-			                    <div class="form-check">
+			                <div class="col-md-3" style="padding-top: 35px">
 			                        <input class="form-check-input" type="checkbox" id="gerente">
 			                        <label class="form-check-label" for="gerente">É gerente?</label>
-			                    </div>
+			                    
 			                </div>
-			                <!-- Campo Funcionário -->
-			                <div class="col-md-6">
-			                    <label for="funcionario" class="form-label">Funcionário</label>
-			                    <div class="form-check">
-			                        <input class="form-check-input" type="checkbox" id="funcionario">
-			                        <label class="form-check-label" for="funcionario">É funcionário?</label>
-			                    </div>
+			                 <!-- Campo Funcionário -->
+			                <div class="col-md-3" style="padding-top: 35px">
+			                    <input class="form-check-input" type="checkbox" id="funcionario">
+			                     <label class="form-check-label" for="funcionario">É funcionário?</label>
 			                </div>
 			            </div>
+			           
 			            <div class="row mb-3">
 			                <!-- Campo CPF -->
-			                <div class="col-md-6">
-			                    <label for="cpf" class="form-label">CPF</label>
+			                <div class="col-md-4">
+			                    <label for="cpf" class="form-label" style="float: left">CPF</label>
 			                    <input type="text" class="form-control" id="cpf" placeholder="Digite o CPF">
+			                </div>
+			                
+			                 <!-- Campo Data de Nascimento -->
+			                <div class="col-md-3">
+			                    <label for="dataNascimento" class="form-label" style="float: left">Data de Nascimento</label>
+			                    <input type="date" class="form-control" id="dataNascimento">
 			                </div>
 			            </div>
 			           

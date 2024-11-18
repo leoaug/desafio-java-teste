@@ -164,17 +164,17 @@ class ProjetoServiceTest {
         // Usando mockStatic para simular o comportamento estático
         try (MockedStatic<ProjetoSpecification> mockedStatic = mockStatic(ProjetoSpecification.class)) {
             
-			Specification<Projeto> specification = mock(Specification.class);
-            mockedStatic.when(() -> ProjetoSpecification.comFiltros(projetoFilter)).thenReturn(specification);
+			Specification<Projeto> specificationMock = mock(Specification.class);
+            mockedStatic.when(() -> ProjetoSpecification.comFiltros(projetoFilter)).thenReturn(specificationMock);
 
             // Quando o repositório for chamado com a Specification
-            when(projetoRepository.findAll(specification)).thenReturn(listaProjetos);
+            when(projetoRepository.findAll(specificationMock)).thenReturn(listaProjetos);
 
             // Chamada do método a ser testado
             List<Projeto> projetos = projetoService.buscarProjetosFiltrados(projetoFilter);
 
             // Verificar se o método findAll foi chamado uma vez com a Specification
-            verify(projetoRepository, times(1)).findAll(specification);
+            verify(projetoRepository, times(1)).findAll(specificationMock);
 
             // Verificar o retorno
             assertNotNull(projetos);
