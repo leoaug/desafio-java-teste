@@ -11,7 +11,6 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -22,6 +21,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.MockitoAnnotations;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 
 import br.com.desafiojava.exception.DesafioJavaException;
@@ -106,7 +106,7 @@ class ProjetoServiceTest {
         });
 
         // Verificando se a mensagem de erro é a esperada
-        assertEquals("Produto não encontrado com ID: 1", thrown.getMessage());
+        assertEquals("Projeto não encontrado com ID: 1", thrown.getMessage());
     }
 
     @Test
@@ -139,18 +139,17 @@ class ProjetoServiceTest {
 
     @Test
     void testGetAll() {
-        // Configurando o comportamento do mock para retornar uma lista de projetos
-        List<Projeto> projetos = new ArrayList<>();
-        projetos.add(projeto);
-        when(projetoRepository.findAll()).thenReturn(projetos);
+    	   List<Projeto> projetos = Arrays.asList(
+                   new Projeto(1L, "Projeto 1", null, null, null, null, null, null, null, null),
+                   new Projeto(2L, "Projeto 2", null, null, null, null, null, null, null, null)
+           );
+           when(projetoRepository.findAll(Sort.by(Sort.Order.asc("nome")))).thenReturn(projetos);
 
-        // Chamando o método de busca de todos os projetos
-        List<Projeto> allProjetos = projetoService.getAll();
+           List<Projeto> result = projetoService.getAll();
 
-        // Verificando os resultados
-        assertNotNull(allProjetos);
-        assertEquals(1, allProjetos.size());
-        assertEquals("Projeto Teste", allProjetos.get(0).getNome());
+           verify(projetoRepository, times(1)).findAll(Sort.by(Sort.Order.asc("nome")));
+           assertEquals(projetos, result);
+
     }
     
     @SuppressWarnings("unchecked")

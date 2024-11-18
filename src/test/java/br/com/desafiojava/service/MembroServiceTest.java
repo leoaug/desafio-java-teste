@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.data.domain.Sort;
 
 import br.com.desafiojava.exception.DesafioJavaException;
 import br.com.desafiojava.jpa.repository.MembroRepository;
@@ -117,11 +118,11 @@ class MembroServiceTest {
                 new Membro(1L, "Carlos", null, null, null),
                 new Membro(2L, "Ana", null, null, null)
         );
-        when(membroRepository.findAll()).thenReturn(membros);
+        when(membroRepository.findAll(Sort.by(Sort.Order.asc("nome")))).thenReturn(membros);
 
         List<Membro> result = membroService.getAll();
 
-        verify(membroRepository, times(1)).findAll();
+        verify(membroRepository, times(1)).findAll(Sort.by(Sort.Order.asc("nome")));
         assertEquals(membros, result);
     }
 
