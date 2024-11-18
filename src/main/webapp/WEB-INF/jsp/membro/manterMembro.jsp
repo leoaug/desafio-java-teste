@@ -6,7 +6,7 @@
 	  	 <div class="card-body">
 		    <h5 class="card-title">Gerente/Funcionário</h5>
 	    
-			    <button class="btn btn-success mb-3" data-toggle="modal" onclick="$('#modalNovoMembro')[0].showModal()">Novo Membro</button>
+			    <button class="btn btn-success mb-3" data-toggle="modal" id="novoMembro" >Novo Membro</button>
 			
 			    <table class="table table-bordered">
 			        <thead>
@@ -109,7 +109,16 @@
 
 <script>
     $(document).ready(function() {
-       
+
+    	$('#novoMembro').click(function() {
+   	        $('#id').val('');
+   	        $('#nome').val('');
+   	        $('#atribuicao').val('');
+   	        $('#projeto').val('');
+   	        $('#funcionario').val('');                
+   	        $('#modalNovoMembro')[0].showModal();
+    	});
+        
         // Criar novo Membro
         $('#salvarMembro').click(function() {
 
