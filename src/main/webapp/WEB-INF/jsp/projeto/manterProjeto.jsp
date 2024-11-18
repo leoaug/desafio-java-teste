@@ -70,10 +70,14 @@
 	      					</c:choose>
 	                    </td>
 	                     <td>${projeto.descricao}</td>
-	                    <td>
-	                        <button class="btn btn-info btn-editar" data-id="${projeto.id}">Editar</button>
+	                    <td style="width: 105x;">
+	                        <button class="btn btn-info rounded-circle btn-editar" data-id="${projeto.id}" title="Editar">
+	                        	<i class="fas fa-edit" ></i>
+	                        </button>
 	                        <c:if test="${!(projeto.status eq '4' || projeto.status eq '6' || projeto.status eq '7')}">                       
-	                        	<button class="btn btn-danger btn-excluir" data-id="${projeto.id}">Excluir</button>                      
+	                        	<button class="btn btn-danger rounded-circle btn-excluir" data-id="${projeto.id}" title="Excluir">
+	                        		 <i class="fas fa-trash" ></i> 
+	                        	</button>                      
 	                        </c:if>
 	                    </td>
 	                </tr>
@@ -141,6 +145,7 @@
 	                    	<div class="col-md-4">                 
 		                    	<label for="risco" style="float:left">Gerente</label>
 		                        <select class="form-select" id="gerente" class="required">
+		                        	<option value="">Selecione o Gerente</option>
 		                        	<c:forEach var="gerente" items="${gerentes}">
 		                            	<option value="${gerente.id}">${gerente.nome}</option>
 		                            </c:forEach>	                           
@@ -149,7 +154,7 @@
 		                    <div class="col-md-2">  
 		                    	 <label for="risco" style="float:left">Risco</label>
 		                        <select class="form-select" id="riscoProjeto" class="required">
-		                         	<option value="">Selecione o risco</option>
+		                         	<option value="">Selecione o Risco</option>
 		                            <option value="1">Baixo</option>
 		                            <option value="2">Médio</option>
 		                            <option value="3">Alto</option>
@@ -158,7 +163,7 @@
 		                    <div class="col-md-3">  
 		                        <label for="status" style="float:left">Status</label>
 		                        <select class="form-select" id="statusProjeto" class="required">
-		                        	<option value="">Selecione o status</option>
+		                        	<option value="">Selecione o Status</option>
 		                            <option value="1">Em Análise</option>
 		                            <option value="2">Análise Realizada</option>
 		                            <option value="3">Análise Aprovada</option>

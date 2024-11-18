@@ -50,11 +50,13 @@
 					            <c:otherwise>Não</c:otherwise>
 	      					</c:choose>
 	                    </td>	                         
-	                    <td>
-	                        <button class="btn btn-info btn-editar" data-id="${pessoa.id}">Editar</button>
-	                        <c:if test="${!(Pessoa.status eq '4' || Pessoa.status eq '6' || Pessoa.status eq '7')}">                       
-	                        	<button class="btn btn-danger btn-excluir" data-id="${pessoa.id}">Excluir</button>                      
-	                        </c:if>
+	                    <td style="width: 105x;">
+	                        <button class="btn btn-info rounded-circle btn-editar" data-id="${pessoa.id}" title="Editar">
+	                        	<i class="fas fa-edit" ></i>
+	                         </button>
+	                        <button class="btn btn-danger rounded-circle btn-excluir" data-id="${pessoa.id}" title="Exclur">
+	                        	<i class="fas fa-trash" ></i> 
+	                        </button>                       	                        
 	                    </td>
 	                </tr>
 	            </c:forEach>

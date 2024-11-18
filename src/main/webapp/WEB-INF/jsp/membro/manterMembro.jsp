@@ -1,44 +1,50 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ include file="/WEB-INF/jsp/template/header.jsp" %>
- <div class="card">
-  	 <div class="card-body">
-	    <h5 class="card-title">Gerente/Funcionário</h5>
-    
-		    <button class="btn btn-success mb-3" data-toggle="modal" onclick="$('#modalNovoMembro')[0].showModal()">Novo Membro</button>
-		
-		    <table class="table table-bordered">
-		        <thead>
-		            <tr>
-		                <th>Nome</th>
-		                <th>Atribuição</th>
-		                <th>Projeto</th>
-		                <th>Funcionário</th>             
-		                <th>Ações</th>
-		            </tr>
-		        </thead>
-		        <tbody id="tabelamembros">
-		            <c:forEach var="membro" items="${membros}">
-		                <tr>
-		                    <td>${membro.nome}</td>
-		                    <td>                    	
-		                    	${membro.atribuicao}
-		                    </td>
-		                    <td>                   	
-		                    	${membro.projeto.nome}
-		                    </td>
-		                    <td>                 	
-		                    	${membro.funcionario.nome}
-		                    </td>               
-		                   
-		                    <td>
-		                        <button class="btn btn-info btn-editar" data-id="${membro.id}">Editar</button>
-		                        <button class="btn btn-danger btn-excluir" data-id="${membro.id}">Excluir</button>                      
-		                    </td>
-		                </tr>
-		            </c:forEach>
-		        </tbody>
-		    </table>
+<div class="container mt-6">
+	 <div class="card">
+	  	 <div class="card-body">
+		    <h5 class="card-title">Gerente/Funcionário</h5>
+	    
+			    <button class="btn btn-success mb-3" data-toggle="modal" onclick="$('#modalNovoMembro')[0].showModal()">Novo Membro</button>
+			
+			    <table class="table table-bordered">
+			        <thead>
+			            <tr>
+			                <th>Nome</th>
+			                <th>Atribuição</th>
+			                <th>Projeto</th>
+			                <th>Funcionário</th>             
+			                <th>Ações</th>
+			            </tr>
+			        </thead>
+			        <tbody id="tabelamembros">
+			            <c:forEach var="membro" items="${membros}">
+			                <tr>
+			                    <td>${membro.nome}</td>
+			                    <td>                    	
+			                    	${membro.atribuicao}
+			                    </td>
+			                    <td>                   	
+			                    	${membro.projeto.nome}
+			                    </td>
+			                    <td>                 	
+			                    	${membro.funcionario.nome}
+			                    </td>               
+			                   
+			                    <td style="width: 105x;">
+			                        <button class="btn btn-info rounded-circle btn-editar" data-id="${membro.id}" title="Editar">
+			                        	<i class="fas fa-edit" ></i>
+			                         </button>
+			                        <button class="btn btn-danger rounded-circle btn-excluir" data-id="${membro.id}" title="Exclur">
+			                        	<i class="fas fa-trash" ></i> 
+			                        </button>                       	                        
+	                    		</td>
+			                </tr>
+			            </c:forEach>
+			        </tbody>
+			    </table>
+		</div>
 	</div>
 </div>
 
