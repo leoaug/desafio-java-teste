@@ -15,7 +15,7 @@
   	 <div class="card-body">
 	    <h5 class="card-title">Gerente/Funcionário</h5>
 	    
-	    <button class="btn btn-success mb-3" data-toggle="modal" onclick="$('#modalNovoPessoa')[0].showModal()">Novo Gerente/Funcionário</button>
+	    <button class="btn btn-success mb-3" data-toggle="modal" id="novaPessoa" >Novo Gerente/Funcionário</button>
 	
 	    <table id="tabelapessoas" class="table table-bordered">
 	        <thead>
@@ -124,7 +124,17 @@
 	
 	<script>
 	    $(document).ready(function() {
-	       
+
+	    	$('#novaPessoa').click(function() {
+	    	    $('#id').val('');
+	    	    $('#nome').val('');
+	    	    $('#dataNascimento').val('');
+	    	    $('#cpf').val('');
+	    	    $("#funcionario").prop("checked", false);
+	    	    $("#gerente").prop("checked", false);
+	    	    $('#modalNovoPessoa')[0].showModal();
+	    	});
+		       
 	        // Criar novo Pessoa
 	        $('#salvarPessoa').click(function() {
 

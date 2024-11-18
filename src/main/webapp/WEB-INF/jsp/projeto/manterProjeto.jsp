@@ -16,7 +16,7 @@
 	    <!-- consulta de Projetos -->
 		<%@ include file="/WEB-INF/jsp/projeto/pesquisarProjeto.jsp" %>
 	    
-	    <button class="btn btn-success mb-3" data-toggle="modal" onclick="$('#modalNovoProjeto')[0].showModal()">Novo Projeto</button>
+	    <button class="btn btn-success mb-3" data-toggle="modal" id="novoProjeto">Novo Projeto</button>
 	
 	    <table id="tabelaProjetos" class="table table-bordered">
 	        <thead>
@@ -187,8 +187,25 @@
 	
 	<script>
 	    $(document).ready(function() {
-	       
-	        // Criar novo projeto
+
+	    	// Criar novo projeto
+	        $('#novoProjeto').click(function() {
+
+	        	$('#id').val('');
+                $('#nomeProjeto').val('');
+                $('#dataInicioProjeto').val('');
+                $('#dataFim').val('');
+                $('#dataPrevisao').val('');
+                $('#orcamento').val('');
+                $('#descricao').val('');
+                $('#riscoProjeto').val('');
+                $('#statusProjeto').val('');
+                $('#gerente').val('');
+                $('#modalNovoProjeto')[0].showModal();
+	        });
+
+		       
+	        // Salvar ou editar projeto
 	        $('#salvarProjeto').click(function() {
 	
 	        	let isValido = validarCampos();
