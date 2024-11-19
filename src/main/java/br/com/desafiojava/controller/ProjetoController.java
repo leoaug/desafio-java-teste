@@ -66,7 +66,7 @@ public class ProjetoController {
 		return projetoService.getById(id);
 	}
 	
-	@GetMapping("/consultar")
+	@GetMapping("consultar")
 	public String consultar(@RequestParam(required = false)  String nome,
 							@RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd")  Date dataInicio,
 							@RequestParam(required = false)  Integer risco,
