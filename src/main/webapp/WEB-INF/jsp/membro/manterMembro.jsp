@@ -69,12 +69,12 @@
                 	  <div class="row mb-4">
                     	 <div class="col-md-6">
                    	 	    <label for="nome" style="float: left">Nome</label>
-                       		<input type="text" class="form-control" id="nome" required>
+                       		<input type="text" class="form-control" id="nome" class="required" placeholder="Digite o nome">
                     	 </div>
                     	 
                     	 <div class="col-md-6">
                     	 	<label for="atribuicao" style="float: left">Atribuição:</label>
-    						<textarea id="atribuicao" class="form-control" rows="5" cols="25" placeholder="Digite a atribuição"></textarea>
+    						<textarea id="atribuicao" class="form-control" rows="5" cols="25" class="required" placeholder="Digite a atribuição"></textarea>
                     	 </div>
 	                  </div>
                 		

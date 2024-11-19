@@ -107,7 +107,7 @@
 			                <!-- Campo Nome -->
 			                <div class="col-md-12">
 			                	  <label for="nomeProjeto" style="float:left">Nome</label>
-	                        	  <input type="text" class="form-control" id="nomeProjeto" class="required">
+	                        	  <input type="text" class="form-control" id="nomeProjeto" class="required" placeholder="Digite o nome">
 			                </div>
 			             </div>
 	                	
@@ -146,7 +146,7 @@
 	                    <div class="row mb-4">	  
 	                    	<div class="col-md-4">                 
 		                    	<label for="risco" style="float:left">Gerente</label>
-		                        <select class="form-select" id="gerente" class="required">
+		                        <select class="form-select required" id="gerente">
 		                        	<option value="">Selecione o Gerente</option>
 		                        	<c:forEach var="gerente" items="${gerentes}">
 		                            	<option value="${gerente.id}">${gerente.nome}</option>
@@ -155,7 +155,7 @@
 		                    </div>    
 		                    <div class="col-md-3">  
 		                    	 <label for="risco" style="float:left">Risco</label>
-		                        <select class="form-select" id="riscoProjeto" class="required">
+		                        <select class="form-select required" id="riscoProjeto">
 		                         	<option value="">Selecione o Risco</option>
 		                            <option value="1">Baixo</option>
 		                            <option value="2">Médio</option>
@@ -164,7 +164,7 @@
 		                    </div>  
 		                    <div class="col-md-3">  
 		                        <label for="status" style="float:left">Status</label>
-		                        <select class="form-select" id="statusProjeto" class="required">
+		                        <select class="form-select required" id="statusProjeto">
 		                        	<option value="">Selecione o Status</option>
 		                            <option value="1">Em Análise</option>
 		                            <option value="2">Análise Realizada</option>
