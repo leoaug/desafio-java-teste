@@ -153,7 +153,7 @@
 		                            </c:forEach>	                           
 		                        </select>  
 		                    </div>    
-		                    <div class="col-md-2">  
+		                    <div class="col-md-3">  
 		                    	 <label for="risco" style="float:left">Risco</label>
 		                        <select class="form-select" id="riscoProjeto" class="required">
 		                         	<option value="">Selecione o Risco</option>

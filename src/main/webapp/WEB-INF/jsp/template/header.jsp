@@ -49,13 +49,19 @@
             
         }
 
+        function limparSessaoMenus(){
+        	$('#loadingDialog')[0].showModal();
+        	sessionStorage.removeItem("idLinkSession");
+        	removeAllVisitedClasses();
+        }
+
 	</script>
 
 </head>
 <body onload="carregarCorVisited()">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
 	    <div class="container-fluid">
-	        <a class="navbar-brand" onclick="$('#loadingDialog')[0].showModal()" href="/">Desafio Java</a>
+	        <a id="linkIndex" class="navbar-brand" onclick="limparSessaoMenus()" href="/">Desafio Java</a>
 	        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
 	            <span class="navbar-toggler-icon"></span>
 	        </button>
