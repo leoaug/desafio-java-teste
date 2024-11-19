@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -67,7 +68,7 @@ public class ProjetoController {
 	
 	@GetMapping("/consultar")
 	public String consultar(@RequestParam(required = false)  String nome,
-							@RequestParam(required = false)  Date dataInicio,
+							@RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd")  Date dataInicio,
 							@RequestParam(required = false)  Integer risco,
 							@RequestParam(required = false)  Integer status,Model model) {
 
