@@ -3,6 +3,7 @@ package br.com.desafiojava.controller;
 import java.util.Date;
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import br.com.desafiojava.dto.ProjetoDTO;
 import br.com.desafiojava.exception.DesafioJavaException;
 import br.com.desafiojava.jpa.filter.ProjetoFilter;
 import br.com.desafiojava.model.Pessoa;
@@ -45,7 +47,8 @@ public class ProjetoController {
 
 	@PostMapping("salvar")
 	@ResponseBody
-	public Projeto salvar(@RequestBody Projeto projeto) throws DesafioJavaException {
+	public Projeto salvar(@RequestBody ProjetoDTO projetoDTO) throws DesafioJavaException {
+		Projeto projeto = new ModelMapper().map(projetoDTO,Projeto.class);
 		projeto.setGerente(pessoaService.getById(projeto.getGerente().getId()));
 		return projeto.getId() == null ? projetoService.save(projeto) : projetoService.update(projeto.getId(), projeto);		
 	}

@@ -2,6 +2,7 @@ package br.com.desafiojava.controller;
 
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import br.com.desafiojava.dto.PessoaDTO;
 import br.com.desafiojava.exception.DesafioJavaException;
 import br.com.desafiojava.model.Pessoa;
 import br.com.desafiojava.service.PessoaService;
@@ -37,7 +39,8 @@ public class PessoaController {
 
 	@PostMapping("salvar")
 	@ResponseBody
-	public Pessoa salvar(@RequestBody Pessoa pessoa) throws DesafioJavaException {
+	public Pessoa salvar(@RequestBody PessoaDTO pessoaDTO) throws DesafioJavaException {
+		Pessoa pessoa = new ModelMapper().map(pessoaDTO,Pessoa.class);
 		return pessoa.getId() == null ? pessoaService.save(pessoa) : pessoaService.update(pessoa.getId(), pessoa);		
 	}
 

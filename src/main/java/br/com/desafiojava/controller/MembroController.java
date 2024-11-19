@@ -1,5 +1,6 @@
 package br.com.desafiojava.controller;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import br.com.desafiojava.dto.MembroDTO;
 import br.com.desafiojava.exception.DesafioJavaException;
 import br.com.desafiojava.model.Membro;
 import br.com.desafiojava.service.MembroService;
@@ -41,7 +43,8 @@ public class MembroController {
 
 	@PostMapping("salvar")
 	@ResponseBody
-	public Membro salvar(@RequestBody Membro membro) throws DesafioJavaException {
+	public Membro salvar(@RequestBody MembroDTO membroDTO) throws DesafioJavaException {
+		Membro membro = new ModelMapper().map(membroDTO,Membro.class);
 		membro.setFuncionario(pessoaService.getById(membro.getFuncionario().getId()));
 		membro.setProjeto(projetoService.getById(membro.getProjeto().getId()));
 		return membro.getId() == null ? membroService.save(membro) : membroService.update(membro.getId(), membro);		

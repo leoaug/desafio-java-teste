@@ -15,8 +15,10 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.modelmapper.ModelMapper;
 import org.springframework.ui.Model;
 
+import br.com.desafiojava.dto.PessoaDTO;
 import br.com.desafiojava.exception.DesafioJavaException;
 import br.com.desafiojava.model.Pessoa;
 import br.com.desafiojava.service.PessoaService;
@@ -62,7 +64,7 @@ class PessoaControllerTest {
         when(pessoaService.save(novaPessoa)).thenReturn(pessoaSalva);
 
         // Call method
-        Pessoa result = pessoaController.salvar(novaPessoa);
+        Pessoa result = pessoaController.salvar(new ModelMapper().map(novaPessoa, PessoaDTO.class));
 
         // Verifications
         verify(pessoaService, times(1)).save(novaPessoa);
@@ -76,7 +78,7 @@ class PessoaControllerTest {
         when(pessoaService.update(pessoaExistente.getId(), pessoaExistente)).thenReturn(pessoaExistente);
 
         // Call method
-        Pessoa result = pessoaController.salvar(pessoaExistente);
+        Pessoa result = pessoaController.salvar(new ModelMapper().map(pessoaExistente, PessoaDTO.class));
 
         // Verifications
         verify(pessoaService, times(1)).update(pessoaExistente.getId(), pessoaExistente);
