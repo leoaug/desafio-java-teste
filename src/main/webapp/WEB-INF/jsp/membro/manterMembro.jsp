@@ -4,7 +4,7 @@
 <div class="container mt-6">
 	 <div class="card">
 	  	 <div class="card-body">
-		    <h5 class="card-title">Membro</h5>
+		    <h5 class="card-title">Manter Membro</h5>
 	    
 			    <button class="btn btn-success mb-3" data-toggle="modal" id="novoMembro" >Novo Membro</button>
 			
@@ -107,6 +107,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" onclick="$('#modalNovoMembro')[0].close()">Fechar</button>
+                &nbsp;&nbsp;
                 <button type="button" class="btn btn-primary" id="salvarMembro">Salvar</button>
             </div>
       </div>

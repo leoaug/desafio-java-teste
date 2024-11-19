@@ -38,5 +38,7 @@ dialog {
 }
 
 .visited {
-    background-color: #f0f8ff; /* Light blue background for visited links */
+     background-color: #d4edda; /* Light green background */
+     color: #155724; /* Dark green text */
+     font-weight: bold; /* Optional for emphasis */
 }

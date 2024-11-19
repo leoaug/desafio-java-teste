@@ -17,9 +17,42 @@
           rel="stylesheet">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 	
+	<script type="text/javascript">
+
+		function abrirModal(idLink){
+			sessionStorage.setItem("idLinkSession",idLink);
+			$('#loadingDialog')[0].showModal();
+		}
+
+		function carregarCorVisited(){
+			 // Get the element by ID
+			removeAllVisitedClasses();
+            const link = document.getElementById(sessionStorage.getItem("idLinkSession"));
+			if(link){
+				 // Add the "visited" CSS class
+	            link.classList.add("visited");
+			}
+           
+		}
+
+		function removeAllVisitedClasses() {
+			
+            // Get all elements with the "visited" class
+            const visitedElements = document.querySelectorAll('.visited');
+
+            if(visitedElements){
+            	// Remove the "visited" class from each element
+                visitedElements.forEach(element => {
+                    element.classList.remove('visited');
+                });
+            }
+            
+        }
+
+	</script>
 
 </head>
-<body>
+<body onload="carregarCorVisited()">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
 	    <div class="container-fluid">
 	        <a class="navbar-brand" onclick="$('#loadingDialog')[0].showModal()" href="/">Desafio Java</a>
@@ -29,14 +62,14 @@
 	        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
 	            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 	                <li class="nav-item custom">
-	                    <a class="nav-link active" aria-current="page" onclick="$('#loadingDialog')[0].showModal()" href="/projeto/index">Manter Projetos</a>
+	                    <a id="linkProjetos" class="nav-link active" aria-current="page" onclick="abrirModal(this.id)" href="/projeto/index">Manter Projeto</a>
 	                </li>
 	                <li class="nav-item custom">
-	                    <a class="nav-link active" aria-current="page" onclick="$('#loadingDialog')[0].showModal()" href="/membro/index">Manter Membro</a>
+	                    <a id="linkMembros" class="nav-link active" aria-current="page" onclick="abrirModal(this.id)" href="/membro/index">Manter Membro</a>
 	                </li>
 	                
 	                <li class="nav-item custom">
-	                    <a class="nav-link active" aria-current="page" onclick="$('#loadingDialog')[0].showModal()" href="/pessoa/index">Manter Gerente/Funcionário</a>
+	                    <a id="linkPessoas" class="nav-link active" aria-current="page" onclick="abrirModal(this.id)" href="/pessoa/index">Manter Gerente/Funcionário</a>
 	                </li>
 	                
 	            </ul>

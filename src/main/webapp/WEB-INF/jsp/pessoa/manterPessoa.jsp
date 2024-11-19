@@ -13,7 +13,7 @@
   
   <div class="card">
   	 <div class="card-body">
-	    <h5 class="card-title">Gerente/Funcionário</h5>
+	    <h5 class="card-title">Manter Gerente/Funcionário</h5>
 	    
 	    <button class="btn btn-success mb-3" data-toggle="modal" id="novaPessoa" >Novo Gerente/Funcionário</button>
 	
@@ -117,6 +117,7 @@
 	            </div>
 	            <div class="modal-footer">
 	                <button type="button" class="btn btn-secondary" onclick="$('#modalNovoPessoa')[0].close()">Fechar</button>
+	                &nbsp;&nbsp;
 	                <button type="button" class="btn btn-primary" id="salvarPessoa">Salvar</button>
 	            </div>
 	     </div>	
