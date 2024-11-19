@@ -83,7 +83,7 @@ class PessoaServiceTest {
 
         DesafioJavaException exception = assertThrows(DesafioJavaException.class, () -> pessoaService.update(pessoaId, pessoa));
 
-        assertEquals("Produto não encontrado com ID: " + pessoaId, exception.getMessage());
+        assertEquals("Pessoa não encontrada com ID: " + pessoaId, exception.getMessage());
         verify(pessoaRepository, times(1)).existsById(pessoaId);
         verify(pessoaRepository, never()).save(any());
     }
@@ -107,7 +107,7 @@ class PessoaServiceTest {
 
         RuntimeException exception = assertThrows(RuntimeException.class, () -> pessoaService.getById(pessoaId));
 
-        assertEquals("Pessoa não encontrado com ID: " + pessoaId, exception.getMessage());
+        assertEquals("Pessoa não encontrada com ID: " + pessoaId, exception.getMessage());
         verify(pessoaRepository, times(1)).findById(pessoaId);
     }
 

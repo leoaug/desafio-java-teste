@@ -33,17 +33,17 @@ public class PessoaService {
         	pessoa.setId(id);
             return pessoaRepository.save(pessoa);
         } else {
-            throw new DesafioJavaException("Produto não encontrado com ID: " + id);
+            throw new DesafioJavaException("Pessoa não encontrada com ID: " + id);
         }
     }
 
     // Buscar Pessoa por ID
     public Pessoa getById(Long id) {
-        Optional<Pessoa> produto = pessoaRepository.findById(id);
-        return produto.orElseThrow(() -> new RuntimeException("Pessoa não encontrado com ID: " + id));
+        Optional<Pessoa> pessoa = pessoaRepository.findById(id);
+        return pessoa.orElseThrow(() -> new RuntimeException("Pessoa não encontrada com ID: " + id));
     }
 
-    // Buscar Todos os Produtos
+    // Buscar Todas as Pessoas
     public List<Pessoa> getAll() {
         return pessoaRepository.findAll(Sort.by(Sort.Order.asc("nome")));
     }

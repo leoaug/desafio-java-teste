@@ -33,14 +33,14 @@ public class MembroService {
         	membro.setId(id);
             return membroRepository.save(membro);
         } else {
-            throw new DesafioJavaException("Produto não encontrado com ID: " + id);
+            throw new DesafioJavaException("Membro não encontrado com ID: " + id);
         }
     }
 
     // Buscar Membro por ID
     public Membro getById(Long id) {
-        Optional<Membro> produto = membroRepository.findById(id);
-        return produto.orElseThrow(() -> new RuntimeException("Membro não encontrado com ID: " + id));
+        Optional<Membro> membro = membroRepository.findById(id);
+        return membro.orElseThrow(() -> new RuntimeException("Membro não encontrado com ID: " + id));
     }
 
     // Buscar Todos os Membros

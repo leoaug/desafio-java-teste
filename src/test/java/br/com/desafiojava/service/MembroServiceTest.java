@@ -84,7 +84,7 @@ class MembroServiceTest {
 
         DesafioJavaException exception = assertThrows(DesafioJavaException.class, () -> membroService.update(membroId, membro));
 
-        assertEquals("Produto não encontrado com ID: " + membroId, exception.getMessage());
+        assertEquals("Membro não encontrado com ID: " + membroId, exception.getMessage());
         verify(membroRepository, times(1)).existsById(membroId);
         verify(membroRepository, never()).save(any());
     }

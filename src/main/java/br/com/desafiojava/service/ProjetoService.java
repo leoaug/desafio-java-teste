@@ -44,11 +44,11 @@ public class ProjetoService {
 
 	// Buscar Projeto por ID
 	public Projeto getById(Long id) {
-		Optional<Projeto> produto = projetoRepository.findById(id);
-		return produto.orElseThrow(() -> new RuntimeException("Projeto não encontrado com ID: " + id));
+		Optional<Projeto> projeto = projetoRepository.findById(id);
+		return projeto.orElseThrow(() -> new RuntimeException("Projeto não encontrado com ID: " + id));
 	}
 
-	 // Buscar Todos os Produtos
+	 // Buscar Todos os Projetos
     public List<Projeto> getAll() {
         return projetoRepository.findAll(Sort.by(Sort.Order.asc("nome")));
     }
