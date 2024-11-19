@@ -19,17 +19,28 @@
 	
 	<script type="text/javascript">
 
-		function abrirModal(idLink){
-			sessionStorage.setItem("idLinkSession",idLink);
+		function abrirModal(){
 			$('#loadingDialog')[0].showModal();
 		}
 
 		function carregarCorVisited(){
+
 			 // Get the element by ID
 			removeAllVisitedClasses();
-            const link = document.getElementById(sessionStorage.getItem("idLinkSession"));
+			
+			const path = window.location.pathname;
+			let link;
+			if(path === '/'){
+				link = document.getElementById("linkIndex");
+			} else if (path === '/pessoa/index'){
+				link = document.getElementById("linkPessoas");
+			} else if (path === '/membro/index'){
+				link = document.getElementById("linkMembros");
+			} else if (path === '/projeto/index'){
+				link = document.getElementById("linkProjetos");
+			}
+            
 			if(link){
-				 // Add the "visited" CSS class
 	            link.classList.add("visited");
 			}
            
@@ -49,11 +60,6 @@
             
         }
 
-        function limparSessaoMenus(){
-        	$('#loadingDialog')[0].showModal();
-        	sessionStorage.removeItem("idLinkSession");
-        	removeAllVisitedClasses();
-        }
 
 	</script>
 
@@ -61,21 +67,21 @@
 <body onload="carregarCorVisited()">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
 	    <div class="container-fluid">
-	        <a id="linkIndex" class="navbar-brand" onclick="limparSessaoMenus()" href="/">Desafio Java</a>
+	        <a id="linkIndex" class="navbar-brand" href="/">Desafio Java</a>
 	        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
 	            <span class="navbar-toggler-icon"></span>
 	        </button>
 	        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
 	            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 	                <li class="nav-item custom">
-	                    <a id="linkProjetos" class="nav-link active" aria-current="page" onclick="abrirModal(this.id)" href="/projeto/index">Manter Projeto</a>
+	                    <a id="linkProjetos" class="nav-link active" aria-current="page" onclick="abrirModal()" href="/projeto/index">Manter Projeto</a>
 	                </li>
 	                <li class="nav-item custom">
-	                    <a id="linkMembros" class="nav-link active" aria-current="page" onclick="abrirModal(this.id)" href="/membro/index">Manter Membro</a>
+	                    <a id="linkMembros" class="nav-link active" aria-current="page" onclick="abrirModal()" href="/membro/index">Manter Membro</a>
 	                </li>
 	                
 	                <li class="nav-item custom">
-	                    <a id="linkPessoas" class="nav-link active" aria-current="page" onclick="abrirModal(this.id)" href="/pessoa/index">Manter Gerente/Funcionário</a>
+	                    <a id="linkPessoas" class="nav-link active" aria-current="page" onclick="abrirModal()" href="/pessoa/index">Manter Gerente/Funcionário</a>
 	                </li>
 	                
 	            </ul>
